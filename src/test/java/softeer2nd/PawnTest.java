@@ -8,11 +8,8 @@ class PawnTest {
     @Test
     @DisplayName("create pawn with colors")
     public void create() {
-        String white = "white";
-        String black = "black";
-
-        verifyPawn(white);
-        verifyPawn(black);
+        verifyPawn(Pawn.WHITE);
+        verifyPawn(Pawn.BLACK);
     }
 
     public static void verifyPawn(final String color) {
@@ -24,6 +21,6 @@ class PawnTest {
     @DisplayName("create pawn without color")
     public void create_noColor() {
         Pawn pawn = new Pawn();
-        assertEquals("white", pawn.getColor());
+        assertEquals(Pawn.WHITE, pawn.getColor());
     }
 }
