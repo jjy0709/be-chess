@@ -6,7 +6,7 @@ import static org.assertj.core.api.Assertions.*;
 
 class PawnTest {
     @Test
-    @DisplayName("create white pawn")
+    @DisplayName("create pawn with colors")
     public void create() {
         String white = "white";
         String black = "black";
@@ -18,5 +18,12 @@ class PawnTest {
     public static void verifyPawn(final String color) {
         Pawn pawn = new Pawn(color);
         assertThat(pawn.getColor()).isEqualTo(color);
+    }
+
+    @Test
+    @DisplayName("create pawn without color")
+    public void create_noColor() {
+        Pawn pawn = new Pawn();
+        assertEquals("white", pawn.getColor());
     }
 }
