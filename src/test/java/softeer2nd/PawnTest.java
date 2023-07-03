@@ -8,10 +8,15 @@ class PawnTest {
     @Test
     @DisplayName("create white pawn")
     public void create() {
-        Pawn pawn = new Pawn("white");
-        assertThat(pawn.getColor()).isEqualTo("white");
+        String white = "white";
+        String black = "black";
 
-        Pawn pawn2 = new Pawn("black");
-        assertThat(pawn2.getColor()).isEqualTo("black");
+        verifyPawn(white);
+        verifyPawn(black);
+    }
+
+    public static void verifyPawn(final String color) {
+        Pawn pawn = new Pawn(color);
+        assertThat(pawn.getColor()).isEqualTo(color);
     }
 }
