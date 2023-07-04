@@ -1,25 +1,22 @@
 package chess;
 
-import chess.pieces.Pawn;
-
-import java.util.ArrayList;
-import java.util.InputMismatchException;
+import chess.pieces.Piece;
 
 import static utils.StringUtils.appendNewLine;
 
 public class Board {
-    static Pawn[][] pieces;
+    static Piece[][] pieces;
     private int sizeNum;
 
     public Board() {
-        this.pieces = new Pawn[8][8];
+        this.pieces = new Piece[8][8];
         this.sizeNum = 0;
     }
 
     public void initialize() {
         for (int i = 0; i < 8; i++) {
-            this.pieces[1][i] = new Pawn(Pawn.BLACK);
-            this.pieces[6][i] = new Pawn(Pawn.WHITE);
+            this.pieces[1][i] = new Piece(Piece.BLACK);
+            this.pieces[6][i] = new Piece(Piece.WHITE);
         }
     }
 
@@ -42,7 +39,7 @@ public class Board {
 
     private String getLineResult(int line) {
         StringBuilder stringBuilder = new StringBuilder();
-        for (Pawn p : this.pieces[line]) {
+        for (Piece p : this.pieces[line]) {
             stringBuilder.append(p!=null?p.getPrint():'.');
         }
         return stringBuilder.toString();
