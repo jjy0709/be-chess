@@ -4,6 +4,9 @@ import chess.pieces.Pawn;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import java.util.InputMismatchException;
+
+import static org.assertj.core.api.Assertions.*;
 import static org.junit.jupiter.api.Assertions.*;
 
 class BoardTest {
@@ -21,5 +24,15 @@ class BoardTest {
         board.add(black);
         assertEquals(2, board.size());
         assertEquals(black, board.findPawn(1));
+    }
+
+    @Test
+    @DisplayName("add other object to board")
+    public void create_other() throws Exception {
+        Board board = new Board();
+        assertThatThrownBy(() -> {
+            board.add(new Integer("7"));
+        }).isInstanceOf(InputMismatchException.class)
+                .hasMessage("Not Pawn");
     }
 }
