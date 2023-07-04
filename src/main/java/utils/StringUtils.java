@@ -5,7 +5,7 @@ public class StringUtils {
     private StringUtils() {
         ;
     }
-    public static void appendNewLine(StringBuilder sb) {
-        sb.append(NEWLINE);
+    public static String appendNewLine(String s) {
+        return s.concat(NEWLINE);
     }
 }

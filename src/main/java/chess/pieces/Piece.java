@@ -4,7 +4,7 @@ public class Piece {
     public static final String WHITE = "white";
     public static final String BLACK = "black";
     public static final String PAWN = "pawn";
-    public static final String KNIGHT = "knight";
+    public static final String KNIGHT = "night";
     public static final String ROOK = "rook";
     public static final String BISHOP = "bishop";
     public static final String QUEEN = "queen";
@@ -12,20 +12,21 @@ public class Piece {
     public static final char WHITE_PRINT = 'p';
     public static final char BLACK_PRINT = 'P';
     private String color;
-    private char print;
     private String type; // pawn, knight, rook, bishop, queen, king
 
 
     private Piece(String color_, String type_) {
         this.color = color_;
-        this.print = color_ == Piece.WHITE? Piece.WHITE_PRINT: Piece.BLACK_PRINT;
         this.type = type_;
     }
 
     public String getColor() {
         return this.color;
     }
-    public char getPrint() { return this.print; }
+    public char getPrint() {
+        if(this.color.equals(WHITE)) return this.type.charAt(0);
+        return this.type.toUpperCase().charAt(0);
+    }
 
     public static Piece createWhitePawn() {
         return new Piece(WHITE, PAWN);
