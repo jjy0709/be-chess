@@ -16,7 +16,10 @@ public class Board {
     }
 
     public Pawn findPawn(int index) {
-        return this.pieces.get(index);
+        if(index < this.size())
+            return this.pieces.get(index);
+        else
+            throw new RuntimeException("Invalid Index");
     }
 
     public <T> void add(T p) throws Exception {
