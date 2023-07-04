@@ -14,15 +14,20 @@ class BoardTest {
     @BeforeEach
     public void initial() {
         board = new Board();
+        board.initialize();
     }
 
     @Test
     public void initialize() throws Exception {
-        board.initialize();
         assertEquals("pppppppp", board.getWhitePawnsResult());
         assertEquals("PPPPPPPP", board.getBlackPawnsResult());
     }
 
+    @Test
+    public void printBoard() {
+        String board_res = board.print();
+        System.out.println(board_res);
+    }
 //    @Test
 //    @DisplayName("create board and add pawn")
 //    public void create() throws Exception {
