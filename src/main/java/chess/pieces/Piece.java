@@ -9,8 +9,6 @@ public class Piece {
     public static final String BISHOP = "bishop";
     public static final String QUEEN = "queen";
     public static final String KING = "king";
-    public static final char WHITE_PRINT = 'p';
-    public static final char BLACK_PRINT = 'P';
     private String color;
     private String type; // pawn, knight, rook, bishop, queen, king
 

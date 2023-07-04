@@ -7,8 +7,8 @@ class PieceTest {
     @Test
     @DisplayName("create pawn with colors")
     public void create_piece() {
-        verifyPiece(Piece.createWhitePawn(), Piece.WHITE, Piece.WHITE_PRINT);
-        verifyPiece(Piece.createBlackPawn(), Piece.BLACK, Piece.BLACK_PRINT);
+        verifyPiece(Piece.createWhitePawn(), Piece.WHITE, 'p');
+        verifyPiece(Piece.createBlackPawn(), Piece.BLACK, 'P');
 
         verifyPiece(Piece.createWhiteKnight(), Piece.WHITE, 'n');
         verifyPiece(Piece.createBlackKnight(), Piece.BLACK, 'N');
