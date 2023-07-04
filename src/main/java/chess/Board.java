@@ -6,26 +6,48 @@ import java.util.ArrayList;
 import java.util.InputMismatchException;
 
 public class Board {
-    static ArrayList<Pawn> pieces;
+    static ArrayList[] pieces;
+    private int sizeNum;
     public Board() {
-        this.pieces = new ArrayList<>();
+        this.pieces = new ArrayList[9];
+        for(int i=1;i<9;i++) this.pieces[i] = new ArrayList();
+        this.sizeNum = 0;
+    }
+
+    public void initialize() {
+        for(int i=0;i<9;i++){
+            this.pieces[2].add(new Pawn(Pawn.BLACK));
+            this.pieces[7].add(new Pawn((Pawn.WHITE)));
+        }
+    }
+
+    public void print() {
+        for(int i=1;i<this.pieces.length;i++){
+          if(this.pieces[i].size() != 0){
+              for(Object o: this.pieces[i]){
+                  System.out.print(((Pawn) o).getPrint());
+              }
+          }
+          else System.out.print("........");
+          System.out.println();
+        }
     }
 
     public int size() {
-        return this.pieces.size();
+        return this.sizeNum;
     }
 
-    public Pawn findPawn(int index) {
-        if(index < this.size())
-            return this.pieces.get(index);
-        else
-            throw new RuntimeException("Invalid Index");
-    }
+//    public Pawn findPawn(int index) {
+//        if(index < this.size())
+//            return this.pieces.get(index);
+//        else
+//            throw new RuntimeException("Invalid Index");
+//    }
 
-    public <T> void add(T p) throws Exception {
-        if(p instanceof Pawn)
-            this.pieces.add((Pawn) p);
-        else
-            throw new InputMismatchException("Not Pawn");
-    }
+//    public <T> void add(T p) throws Exception {
+//        if(p instanceof Pawn)
+//            this.pieces.add((Pawn) p);
+//        else
+//            throw new InputMismatchException("Not Pawn");
+//    }
 }
