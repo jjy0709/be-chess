@@ -6,45 +6,42 @@ import java.util.ArrayList;
 import java.util.InputMismatchException;
 
 public class Board {
-    static ArrayList[] pieces;
+    static Pawn[][] pieces;
     private int sizeNum;
+
     public Board() {
-        this.pieces = new ArrayList[9];
-        for(int i=1;i<9;i++) this.pieces[i] = new ArrayList();
+        this.pieces = new Pawn[8][8];
         this.sizeNum = 0;
     }
 
     public void initialize() {
-        for(int i=1;i<9;i++){
-            this.pieces[2].add(new Pawn(Pawn.BLACK));
-            this.pieces[7].add(new Pawn((Pawn.WHITE)));
+        for (int i = 0; i < 8; i++) {
+            this.pieces[1][i] = new Pawn(Pawn.BLACK);
+            this.pieces[6][i] = new Pawn(Pawn.WHITE);
         }
     }
 
-    public void print() {
-        for(int i=1;i<this.pieces.length;i++){
-          if(this.pieces[i].size() != 0){
-              for(Object o: this.pieces[i]){
-                  System.out.print(((Pawn) o).getPrint());
-              }
-          }
-          else System.out.print("........");
-          System.out.println();
-        }
-    }
-
-    public String getWhitePawnsResult() {
+    public String print() {
         StringBuilder stringBuilder = new StringBuilder();
-        for(Object p: this.pieces[7]){
-            stringBuilder.append(((Pawn)p).getPrint());
+        for (int i = 0; i < this.pieces.length; i++) {
+            stringBuilder.append(getLineResult(i));
+            stringBuilder.append('\n');
         }
         return stringBuilder.toString();
     }
 
+    public String getWhitePawnsResult() {
+        return getLineResult(6);
+    }
+
     public String getBlackPawnsResult() {
+        return getLineResult(1);
+    }
+
+    private String getLineResult(int line) {
         StringBuilder stringBuilder = new StringBuilder();
-        for(Object p: this.pieces[2]){
-            stringBuilder.append(((Pawn)p).getPrint());
+        for (Pawn p : this.pieces[line]) {
+            stringBuilder.append(p!=null?p.getPrint():'.');
         }
         return stringBuilder.toString();
     }
