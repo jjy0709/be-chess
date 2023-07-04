@@ -10,25 +10,34 @@ class PieceTest {
         verifyPiece(Piece.createWhitePawn(), Piece.WHITE, Piece.WHITE_PRINT);
         verifyPiece(Piece.createBlackPawn(), Piece.BLACK, Piece.BLACK_PRINT);
 
-        verifyPiece(Piece.createWhiteKnight(), Piece.WHITE, Piece.WHITE_PRINT);
-        verifyPiece(Piece.createBlackKnight(), Piece.BLACK, Piece.BLACK_PRINT);
+        verifyPiece(Piece.createWhiteKnight(), Piece.WHITE, 'n');
+        verifyPiece(Piece.createBlackKnight(), Piece.BLACK, 'N');
 
-        verifyPiece(Piece.createWhiteRook(), Piece.WHITE, Piece.WHITE_PRINT);
-        verifyPiece(Piece.createBlackRook(), Piece.BLACK, Piece.BLACK_PRINT);
+        verifyPiece(Piece.createWhiteRook(), Piece.WHITE, 'r');
+        verifyPiece(Piece.createBlackRook(), Piece.BLACK, 'R');
 
-        verifyPiece(Piece.createWhiteBishop(), Piece.WHITE, Piece.WHITE_PRINT);
-        verifyPiece(Piece.createBlackBishop(), Piece.BLACK, Piece.BLACK_PRINT);
+        verifyPiece(Piece.createWhiteBishop(), Piece.WHITE, 'b');
+        verifyPiece(Piece.createBlackBishop(), Piece.BLACK, 'B');
 
-        verifyPiece(Piece.createWhiteQueen(), Piece.WHITE, Piece.WHITE_PRINT);
-        verifyPiece(Piece.createBlackQueen(), Piece.BLACK, Piece.BLACK_PRINT);
+        verifyPiece(Piece.createWhiteQueen(), Piece.WHITE, 'q');
+        verifyPiece(Piece.createBlackQueen(), Piece.BLACK, 'Q');
 
-        verifyPiece(Piece.createWhiteKing(), Piece.WHITE, Piece.WHITE_PRINT);
-        verifyPiece(Piece.createBlackKing(), Piece.BLACK, Piece.BLACK_PRINT);
+        verifyPiece(Piece.createWhiteKing(), Piece.WHITE, 'k');
+        verifyPiece(Piece.createBlackKing(), Piece.BLACK, 'K');
     }
 
-    public static void verifyPiece(Piece piece, final String color, final char representation) {
+    private void verifyPiece(Piece piece, final String color, final char representation) {
         assertEquals(color, piece.getColor());
         assertEquals(representation, piece.getPrint());
+    }
+
+    @Test
+    public void checkPieceColor(){
+        Piece whitePawn = Piece.createWhitePawn();
+        assertSame(whitePawn.isWhite(), true);
+
+        Piece blackPawn = Piece.createBlackPawn();
+        assertSame(blackPawn.isBlack(), true);
     }
 
 //    @Test

@@ -28,6 +28,14 @@ public class Piece {
         return this.type.toUpperCase().charAt(0);
     }
 
+    public boolean isWhite() {
+        return this.color.equals(WHITE);
+    }
+
+    public boolean isBlack() {
+        return this.color.equals(BLACK);
+    }
+
     public static Piece createWhitePawn() {
         return new Piece(WHITE, PAWN);
     }
