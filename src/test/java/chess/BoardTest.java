@@ -12,8 +12,15 @@ class BoardTest {
     Board board;
 
     @BeforeEach
-    public void initialize() {
+    public void initial() {
         board = new Board();
+    }
+
+    @Test
+    public void initialize() throws Exception {
+        board.initialize();
+        assertEquals("pppppppp", board.getWhitePawnsResult());
+        assertEquals("PPPPPPPP", board.getBlackPawnsResult());
     }
 
 //    @Test
