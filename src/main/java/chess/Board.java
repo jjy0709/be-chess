@@ -5,6 +5,8 @@ import chess.pieces.Pawn;
 import java.util.ArrayList;
 import java.util.InputMismatchException;
 
+import static utils.StringUtils.appendNewLine;
+
 public class Board {
     static Pawn[][] pieces;
     private int sizeNum;
@@ -25,8 +27,8 @@ public class Board {
         StringBuilder stringBuilder = new StringBuilder();
         for (int i = 0; i < this.pieces.length; i++) {
             stringBuilder.append(getLineResult(i));
-            stringBuilder.append('\n');
         }
+        appendNewLine(stringBuilder);
         return stringBuilder.toString();
     }
 
