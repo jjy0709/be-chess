@@ -24,7 +24,7 @@ public class Piece {
         return this.color;
     }
     public char getPrint() {
-        if(this.color.equals(WHITE)) return this.type.charAt(0);
+        if(this.isWhite()) return this.type.charAt(0);
         return this.type.toUpperCase().charAt(0);
     }
 
