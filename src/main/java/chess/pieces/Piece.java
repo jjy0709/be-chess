@@ -38,6 +38,7 @@ public class Piece {
     public Color getColor() {
         return this.color;
     }
+    public Type getType() { return this.type; }
     public char getPrint() {
         if(this.color != Color.BLACK)
             return this.type.getWhiteRepresentation();
@@ -88,4 +89,5 @@ public class Piece {
     public static Piece createBlackKing() {
         return new Piece(Color.BLACK, Type.KING);
     }
+    public static Piece createBlank() { return new Piece(Color.NOCOLOR, Type.NO_PIECE); }
 }
