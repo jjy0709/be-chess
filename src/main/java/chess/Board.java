@@ -110,6 +110,44 @@ public class Board {
         this.ranks.get(pos.rank).move(pos.colum, piece);
     }
 
+    public double calculateScore(Piece.Color color) {
+        if(!checkKingAlive(color)) return 0.;
+
+        double res = 0.;
+
+        for(Rank rank: this.ranks){
+            res += rank.calculateScore(color);
+        }
+
+        double pawnRep = this.checkMultiPawn(color);
+
+        return res - pawnRep;
+    }
+
+    private boolean checkKingAlive(Piece.Color color) {
+        for(Rank rank: this.ranks){
+            if(rank.checkKingAlive(color)) return true;
+        }
+        return false;
+    }
+
+    public double checkMultiPawn(Piece.Color color) {
+        int[] pawnCnt = new int[8];
+
+        for(Rank rank: this.ranks){
+            ArrayList<Integer> list = rank.getPawnPosition(color);
+            for(int i:list) pawnCnt[i] += 1;
+        }
+
+        double res = 0.;
+        for(int cnt: pawnCnt){
+            if(cnt <= 1) continue;
+            res += cnt * 0.5;
+        }
+
+        return res;
+    }
+
 
 //    public int pieceCount() {
 //        return this.pieceCnt;

@@ -76,4 +76,31 @@ public class Rank {
         for (int i=0;i<8;i++) rank.pieces.add(Piece.createBlank());
         return rank;
     }
+
+    public ArrayList<Integer> getPawnPosition(Piece.Color color) {
+        ArrayList<Integer> res = new ArrayList<>();
+        for(int i=0;i<this.pieces.size();i++){
+            Piece piece = this.pieces.get(i);
+            if(piece.getColor() != color) continue;
+            if(piece.getType() == Piece.Type.PAWN) res.add(i);
+        }
+        return res;
+    }
+
+    public double calculateScore(Piece.Color color) {
+        double res = 0.;
+        for(Piece piece: this.pieces){
+            if(piece.getColor() != color) continue;
+            res += piece.getType().getScore();
+        }
+        return res;
+    }
+
+    public boolean checkKingAlive(Piece.Color color) {
+        for(Piece piece: this.pieces){
+            if(piece.getColor() != color) continue;
+            if(piece.getType() == Piece.Type.KING) return true;
+        }
+        return false;
+    }
 }
