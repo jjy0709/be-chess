@@ -48,6 +48,27 @@ class BoardTest {
         assertEquals(board.getPieceCount(Piece.createBlank()), 32);
     }
 
+    @Test
+    public void referPieceByLocation() {
+        board.initialize();
+
+        assertEquals(Piece.createBlackRook(), board.getPieceAt("a8"));
+        assertEquals(Piece.createBlackRook(), board.getPieceAt("h8"));
+        assertEquals(Piece.createWhiteRook(), board.getPieceAt("a1"));
+        assertEquals(Piece.createWhiteRook(), board.getPieceAt("h1"));
+    }
+
+    @Test
+    public void move() throws Exception {
+        board.initializeEmpty();
+
+        String position = "b5";
+        Piece piece = Piece.createBlackRook();
+        board.move(position, piece);
+
+        assertEquals(piece, board.getPieceAt(position));
+        System.out.println(board.print());
+    }
 //    @Test
 //    public void printBoard() {
 //        String board_res = board.print();

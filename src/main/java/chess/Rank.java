@@ -20,9 +20,17 @@ public class Rank {
     public int getPieceCount(Piece p) {
         int res = 0;
         for(Piece piece: this.pieces){
-            res += piece.isSame(p)?1:0;
+            res += piece.equals(p)?1:0;
         }
         return res;
+    }
+
+    public Piece getPieceAt(int c) {
+        return this.pieces.get(c);
+    }
+
+    public void move(int c, Piece piece) {
+        this.pieces.set(c, piece);
     }
 
     public static Rank createBlackPawnRank() {

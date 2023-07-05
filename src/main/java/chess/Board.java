@@ -7,20 +7,24 @@ import java.util.ArrayList;
 import static utils.StringUtils.appendNewLine;
 
 public class Board {
-    static ArrayList<Rank> pieces;
+    static ArrayList<Rank> ranks;
 //    private int pieceCnt;
 
     public Board() {
-        this.pieces = new ArrayList<Rank>();
+        this.ranks = new ArrayList<Rank>();
 //        this.pieceCnt = 0;
     }
 
     public void initialize() {
-        this.pieces.add(Rank.createBlackPieceRank());
-        this.pieces.add(Rank.createBlackPawnRank());
-        for(int i=0;i<4;i++) this.pieces.add(Rank.createBlankRank());
-        this.pieces.add(Rank.createWhitePawnRank());
-        this.pieces.add(Rank.createWhitePieceRank());
+        this.ranks.add(Rank.createBlackPieceRank());
+        this.ranks.add(Rank.createBlackPawnRank());
+        for(int i=0;i<4;i++) this.ranks.add(Rank.createBlankRank());
+        this.ranks.add(Rank.createWhitePawnRank());
+        this.ranks.add(Rank.createWhitePieceRank());
+    }
+
+    public void initializeEmpty() {
+        for(int i=0;i<8;i++) this.ranks.add(Rank.createBlankRank());
     }
 
 //    private void addBlackPawns() {
@@ -73,7 +77,7 @@ public class Board {
 
     public String print() {
         StringBuilder stringBuilder = new StringBuilder();
-        for (Rank r: this.pieces) {
+        for (Rank r: this.ranks) {
             stringBuilder.append(r.getPrint());
             stringBuilder.append(appendNewLine(""));
         }
@@ -81,19 +85,29 @@ public class Board {
     }
 
     public String getWhitePawnsResult() {
-        return this.pieces.get(6).getPrint();
+        return this.ranks.get(6).getPrint();
     }
 
     public String getBlackPawnsResult() {
-        return this.pieces.get(1).getPrint();
+        return this.ranks.get(1).getPrint();
     }
 
     public int getPieceCount(Piece p) {
         int res = 0;
-        for(Rank r: this.pieces){
+        for(Rank r: this.ranks){
             res += r.getPieceCount(p);
         }
         return res;
+    }
+
+    public Piece getPieceAt(String loc) {
+        Position pos = new Position(loc);
+        return this.ranks.get(pos.rank).getPieceAt(pos.colum);
+    }
+
+    public void move(String loc, Piece piece) {
+        Position pos = new Position(loc);
+        this.ranks.get(pos.rank).move(pos.colum, piece);
     }
 
 

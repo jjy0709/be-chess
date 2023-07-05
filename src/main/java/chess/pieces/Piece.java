@@ -60,7 +60,11 @@ public class Piece {
         return this.color == Color.BLACK;
     }
 
-    public boolean isSame(Piece p) { return this.color == p.color && this.type == p.type; }
+    public boolean equals(Object p) {
+        if(!(p instanceof Piece)) return false;
+        Piece piece = (Piece) p;
+        return this.color == piece.color && this.type == piece.type;
+    }
 
     private static Piece createWhite(Type type) {
         return new Piece(Color.WHITE, type);
