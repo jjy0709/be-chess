@@ -3,6 +3,8 @@ package chess;
 import chess.pieces.Piece;
 import org.junit.jupiter.api.*;
 
+import java.util.ArrayList;
+
 import static org.junit.jupiter.api.Assertions.*;
 import static utils.StringUtils.appendNewLine;
 
@@ -92,6 +94,25 @@ class BoardTest {
 
     private void addPiece(String position, Piece piece) {
         board.move(position, piece);
+    }
+
+    @Test
+    public void sortPieceAscend() {
+//        board.initialize();
+        board.initializeEmpty();
+
+        addPiece("b6", Piece.createBlackPawn());
+        addPiece("e6", Piece.createBlackQueen());
+        addPiece("b8", Piece.createBlackKing());
+        addPiece("c8", Piece.createBlackRook());
+
+        addPiece("f2", Piece.createWhitePawn());
+        addPiece("g2", Piece.createWhitePawn());
+        addPiece("e1", Piece.createWhiteRook());
+        addPiece("f1", Piece.createWhiteKing());
+
+        ArrayList<Piece> res = board.sortPiecesByScore(Piece.Color.BLACK, false);
+        for(Piece piece:res) System.out.println(piece.getScore());
     }
 //    @Test
 //    public void printBoard() {

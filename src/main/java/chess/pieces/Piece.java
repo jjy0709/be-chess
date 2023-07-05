@@ -52,6 +52,10 @@ public class Piece {
         return this.type;
     }
 
+    public double getScore() {
+        return this.type.getScore();
+    }
+
     public char getPrint() {
         if (this.color != Color.BLACK)
             return this.type.getWhiteRepresentation();

@@ -3,6 +3,8 @@ package chess;
 import chess.pieces.Piece;
 
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
 
 import static utils.StringUtils.appendNewLine;
 
@@ -25,6 +27,20 @@ public class Board {
 
     public void initializeEmpty() {
         for(int i=0;i<8;i++) this.ranks.add(Rank.createBlankRank());
+    }
+
+    public ArrayList<Piece> sortPiecesByScore(Piece.Color color, boolean asend) {
+        ArrayList<Piece> res = new ArrayList<>();
+
+        for(Rank rank: this.ranks){
+            ArrayList<Piece> list = rank.getPieceofColor(color);
+            res.addAll(list);
+        }
+
+        res.sort((Piece p1, Piece p2) -> (int)Math.floor(p1.getScore() - p2.getScore()));
+        if(!asend) Collections.reverse(res);
+
+        return res;
     }
 
 //    private void addBlackPawns() {
