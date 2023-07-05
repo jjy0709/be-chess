@@ -17,6 +17,14 @@ public class Rank {
         return stringBuilder.toString();
     }
 
+    public int getPieceCount(Piece p) {
+        int res = 0;
+        for(Piece piece: this.pieces){
+            res += piece.isSame(p)?1:0;
+        }
+        return res;
+    }
+
     public static Rank createBlackPawnRank() {
         Rank rank = new Rank();
         for(int i=0;i<8;i++) rank.pieces.add(Piece.createBlackPawn());

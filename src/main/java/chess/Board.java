@@ -88,6 +88,14 @@ public class Board {
         return this.pieces.get(1).getPrint();
     }
 
+    public int getPieceCount(Piece p) {
+        int res = 0;
+        for(Rank r: this.pieces){
+            res += r.getPieceCount(p);
+        }
+        return res;
+    }
+
 
 //    public int pieceCount() {
 //        return this.pieceCnt;

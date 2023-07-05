@@ -1,5 +1,6 @@
 package chess;
 
+import chess.pieces.Piece;
 import org.junit.jupiter.api.*;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -26,6 +27,25 @@ class BoardTest {
                         appendNewLine("rnbqkbnr"),
                 board.print()
         );
+    }
+
+    @Test
+    public void verifyPieceCount() {
+        board.initialize();
+        assertEquals(board.getPieceCount(Piece.createBlackPawn()), 8);
+        assertEquals(board.getPieceCount(Piece.createWhitePawn()), 8);
+        assertEquals(board.getPieceCount(Piece.createBlackKnight()), 2);
+        assertEquals(board.getPieceCount(Piece.createWhiteKnight()), 2);
+        assertEquals(board.getPieceCount(Piece.createBlackBishop()), 2);
+        assertEquals(board.getPieceCount(Piece.createWhiteBishop()), 2);
+        assertEquals(board.getPieceCount(Piece.createBlackRook()), 2);
+        assertEquals(board.getPieceCount(Piece.createWhiteRook()), 2);
+        assertEquals(board.getPieceCount(Piece.createBlackQueen()), 1);
+        assertEquals(board.getPieceCount(Piece.createWhiteQueen()), 1);
+        assertEquals(board.getPieceCount(Piece.createBlackKing()), 1);
+        assertEquals(board.getPieceCount(Piece.createWhiteKing()), 1);
+
+        assertEquals(board.getPieceCount(Piece.createBlank()), 32);
     }
 
 //    @Test

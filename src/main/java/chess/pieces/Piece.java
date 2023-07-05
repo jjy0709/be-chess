@@ -60,6 +60,8 @@ public class Piece {
         return this.color == Color.BLACK;
     }
 
+    public boolean isSame(Piece p) { return this.color == p.color && this.type == p.type; }
+
     private static Piece createWhite(Type type) {
         return new Piece(Color.WHITE, type);
     }
