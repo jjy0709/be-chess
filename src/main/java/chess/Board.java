@@ -2,71 +2,89 @@ package chess;
 
 import chess.pieces.Piece;
 
+import java.util.ArrayList;
+
 import static utils.StringUtils.appendNewLine;
 
 public class Board {
-    static Piece[][] pieces;
+    static ArrayList<ArrayList<Piece>> pieces;
     private int pieceCnt;
 
     public Board() {
-        this.pieces = new Piece[8][8];
+        this.pieces = new ArrayList<>();
         this.pieceCnt = 0;
     }
 
     public void initialize() {
         addBlackPieces();
-        for (int i = 0; i < 8; i++) {
-            this.pieces[1][i] = Piece.createBlackPawn();
-            this.pieces[6][i] = Piece.createWhitePawn();
-            this.pieceCnt += 2;
-        }
+        addBlackPawns();
+        for(int i=0;i<4;i++) this.pieces.add(new ArrayList<>());
+        addWhitePawns();
         addWhitePieces();
     }
 
-    private void addWhitePieces() {
-        this.pieces[7][0] = Piece.createWhiteRook();
-        this.pieces[7][1] = Piece.createWhiteKnight();
-        this.pieces[7][2] = Piece.createWhiteBishop();
-        this.pieces[7][3] = Piece.createWhiteQueen();
-        this.pieces[7][4] = Piece.createWhiteKing();
-        this.pieces[7][5] = Piece.createWhiteBishop();
-        this.pieces[7][6] = Piece.createWhiteKnight();
-        this.pieces[7][7] = Piece.createWhiteRook();
+    private void addBlackPawns() {
+        ArrayList blackPawns = new ArrayList();
+        for(int i=0;i<8;i++) blackPawns.add(Piece.createBlackPawn());
+        this.pieces.add(blackPawns);
+        this.pieceCnt += 8;
+    }
+
+    private void addWhitePawns() {
+        ArrayList whitePawns = new ArrayList();
+        for(int i=0;i<8;i++) whitePawns.add(Piece.createWhitePawn());
+        this.pieces.add(whitePawns);
         this.pieceCnt += 8;
     }
 
     private void addBlackPieces() {
-        this.pieces[0][0] = Piece.createBlackRook();
-        this.pieces[0][1] = Piece.createBlackKnight();
-        this.pieces[0][2] = Piece.createBlackBishop();
-        this.pieces[0][3] = Piece.createBlackQueen();
-        this.pieces[0][4] = Piece.createBlackKing();
-        this.pieces[0][5] = Piece.createBlackBishop();
-        this.pieces[0][6] = Piece.createBlackKnight();
-        this.pieces[0][7] = Piece.createBlackRook();
+        ArrayList blackPieces = new ArrayList();
+        blackPieces.add(Piece.createBlackRook());
+        blackPieces.add(Piece.createBlackKnight());
+        blackPieces.add(Piece.createBlackBishop());
+        blackPieces.add(Piece.createBlackQueen());
+        blackPieces.add(Piece.createBlackKing());
+        blackPieces.add(Piece.createBlackBishop());
+        blackPieces.add(Piece.createBlackKnight());
+        blackPieces.add(Piece.createBlackRook());
+        this.pieces.add(blackPieces);
+        this.pieceCnt += 8;
+    }
+    private void addWhitePieces() {
+        ArrayList whitePieces = new ArrayList();
+        whitePieces.add(Piece.createWhiteRook());
+        whitePieces.add(Piece.createWhiteKnight());
+        whitePieces.add(Piece.createWhiteBishop());
+        whitePieces.add(Piece.createWhiteQueen());
+        whitePieces.add(Piece.createWhiteKing());
+        whitePieces.add(Piece.createWhiteBishop());
+        whitePieces.add(Piece.createWhiteKnight());
+        whitePieces.add(Piece.createWhiteRook());
+        this.pieces.add(whitePieces);
         this.pieceCnt += 8;
     }
 
     public String print() {
         StringBuilder stringBuilder = new StringBuilder();
-        for (int i = 0; i < this.pieces.length; i++) {
-            stringBuilder.append(getLineResult(i));
+        for (ArrayList pieceList: this.pieces) {
+            stringBuilder.append(getLineResult(pieceList));
             stringBuilder.append(appendNewLine(""));
         }
         return stringBuilder.toString();
     }
 
     public String getWhitePawnsResult() {
-        return getLineResult(6);
+        return getLineResult(this.pieces.get(6));
     }
 
     public String getBlackPawnsResult() {
-        return getLineResult(1);
+        return getLineResult(this.pieces.get(1));
     }
 
-    private String getLineResult(int line) {
+    private String getLineResult(ArrayList<Piece> list) {
+        if(list.size()==0) return "........";
         StringBuilder stringBuilder = new StringBuilder();
-        for (Piece p : this.pieces[line]) {
+        for (Piece p : list) {
             stringBuilder.append(p!=null?p.getPrint():'.');
         }
         return stringBuilder.toString();
