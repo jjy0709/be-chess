@@ -25,10 +25,6 @@ public class Board {
         for(int i=0;i<8;i++) this.ranks.add(Rank.createBlankRank());
     }
 
-    public String print() {
-        return this.ranks.stream().map(Rank::getPrint).map(p -> appendNewLine(p)).collect(Collectors.joining());
-    }
-
     public Stream<Rank> getRank() {
         return this.ranks.stream();
     }
@@ -45,42 +41,6 @@ public class Board {
     public void move(String loc, Piece piece) {
         Position pos = new Position(loc);
         this.ranks.get(pos.rank).move(pos.colum, piece);
-    }
-
-    public double calculateScore(Piece.Color color) {
-        if(!checkKingAlive(color)) return 0.;
-
-//        double pawnRep = this.checkMultiPawn(color);
-
-        return this.ranks.stream().mapToDouble(r -> r.calculateScore(color)).sum() - this.checkMultiPawn(color);
-    }
-
-    private boolean checkKingAlive(Piece.Color color) {
-        return this.ranks.stream().anyMatch(r -> r.checkKingAlive(color));
-    }
-
-    public double checkMultiPawn(Piece.Color color) {
-//        Map<Integer, Long> pawnCnt = this.ranks.stream()
-//                .flatMapToInt(r->r.getPawnPosition(color))
-//                 .boxed()
-//                 .collect(Collectors.groupingBy(arg -> arg, HashMap::new, Collectors.counting()));
-
-        return this.ranks.stream()
-                .flatMapToInt(r->r.getPawnPosition(color))
-                .boxed()
-                .collect(Collectors.groupingBy(arg -> arg, HashMap::new, Collectors.counting()))
-                .values().stream()
-                .filter(p -> p >= 2)
-                .mapToDouble(p -> p*0.5)
-                .sum();
-    }
-
-    public List<Piece> sortPiecesByScore(Piece.Color color, boolean asend) {
-        Comparator cmp = asend?Comparator.comparing(Piece::getScore):Comparator.comparing(Piece::getScore).reversed();
-
-        return this.ranks.stream()
-                .flatMap(r -> r.getPieceOfColor(color))
-                .sorted(cmp).toList();
     }
 
     public void move(String src, String des) {
