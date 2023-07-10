@@ -104,7 +104,7 @@ public class Rank {
         return false;
     }
 
-    public ArrayList<Piece> getPieceofColor(Piece.Color color) {
+    public ArrayList<Piece> getPieceOfColor(Piece.Color color) {
         ArrayList<Piece> res = new ArrayList<>();
         for(Piece piece: this.pieces){
             if(piece.getColor() == color) res.add(piece);

@@ -71,7 +71,7 @@ public class Piece {
     }
 
     public boolean equals(Object p) {
-        if(!(p instanceof Piece)) return false;
+        if (!(p instanceof Piece)) return false;
         Piece piece = (Piece) p;
         return this.color == piece.color && this.type == piece.type;
     }

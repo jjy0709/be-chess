@@ -10,11 +10,9 @@ import static utils.StringUtils.appendNewLine;
 
 public class Board {
     static ArrayList<Rank> ranks;
-//    private int pieceCnt;
 
     public Board() {
         this.ranks = new ArrayList<Rank>();
-//        this.pieceCnt = 0;
     }
 
     public void initialize() {
@@ -28,68 +26,6 @@ public class Board {
     public void initializeEmpty() {
         for(int i=0;i<8;i++) this.ranks.add(Rank.createBlankRank());
     }
-
-    public ArrayList<Piece> sortPiecesByScore(Piece.Color color, boolean asend) {
-        ArrayList<Piece> res = new ArrayList<>();
-
-        for(Rank rank: this.ranks){
-            ArrayList<Piece> list = rank.getPieceofColor(color);
-            res.addAll(list);
-        }
-
-        res.sort((Piece p1, Piece p2) -> (int)Math.floor(p1.getScore() - p2.getScore()));
-        if(!asend) Collections.reverse(res);
-
-        return res;
-    }
-
-//    private void addBlackPawns() {
-//        ArrayList blackPawns = new ArrayList();
-//        for(int i=0;i<8;i++) blackPawns.add(Piece.createBlackPawn());
-//        this.pieces.add(blackPawns);
-//        this.pieceCnt += 8;
-//    }
-//
-//    private void addWhitePawns() {
-//        ArrayList whitePawns = new ArrayList();
-//        for(int i=0;i<8;i++) whitePawns.add(Piece.createWhitePawn());
-//        this.pieces.add(whitePawns);
-//        this.pieceCnt += 8;
-//    }
-//
-//    private void addBlackPieces() {
-//        ArrayList blackPieces = new ArrayList();
-//        blackPieces.add(Piece.createBlackRook());
-//        blackPieces.add(Piece.createBlackKnight());
-//        blackPieces.add(Piece.createBlackBishop());
-//        blackPieces.add(Piece.createBlackQueen());
-//        blackPieces.add(Piece.createBlackKing());
-//        blackPieces.add(Piece.createBlackBishop());
-//        blackPieces.add(Piece.createBlackKnight());
-//        blackPieces.add(Piece.createBlackRook());
-//        this.pieces.add(blackPieces);
-//        this.pieceCnt += 8;
-//    }
-//    private void addWhitePieces() {
-//        ArrayList whitePieces = new ArrayList();
-//        whitePieces.add(Piece.createWhiteRook());
-//        whitePieces.add(Piece.createWhiteKnight());
-//        whitePieces.add(Piece.createWhiteBishop());
-//        whitePieces.add(Piece.createWhiteQueen());
-//        whitePieces.add(Piece.createWhiteKing());
-//        whitePieces.add(Piece.createWhiteBishop());
-//        whitePieces.add(Piece.createWhiteKnight());
-//        whitePieces.add(Piece.createWhiteRook());
-//        this.pieces.add(whitePieces);
-//        this.pieceCnt += 8;
-//    }
-//
-//    private void addBlankPieces() {
-//        ArrayList<Piece> blankPieces = new ArrayList();
-//        for(int i=0;i<8;i++) blankPieces.add(Piece.createBlank());
-//        this.pieces.add(blankPieces);
-//        this.pieceCnt += 8;
-//    }
 
     public String print() {
         StringBuilder stringBuilder = new StringBuilder();
@@ -164,22 +100,25 @@ public class Board {
         return res;
     }
 
+    public ArrayList<Piece> sortPiecesByScore(Piece.Color color, boolean asend) {
+        ArrayList<Piece> res = new ArrayList<>();
 
-//    public int pieceCount() {
-//        return this.pieceCnt;
-//    }
+        for(Rank rank: this.ranks){
+            ArrayList<Piece> list = rank.getPieceOfColor(color);
+            res.addAll(list);
+        }
 
-//    public Pawn findPawn(int index) {
-//        if(index < this.size())
-//            return this.pieces.get(index);
-//        else
-//            throw new RuntimeException("Invalid Index");
-//    }
+        res.sort((Piece p1, Piece p2) -> (int)Math.floor(p1.getScore() - p2.getScore()));
+        if(!asend) Collections.reverse(res);
 
-//    public <T> void add(T p) throws Exception {
-//        if(p instanceof Pawn)
-//            this.pieces.add((Pawn) p);
-//        else
-//            throw new InputMismatchException("Not Pawn");
-//    }
+        return res;
+    }
+
+    public void move(String src, String des) {
+//        Position pos_src = new Position(src);
+//        Position pos_des = new Position(des);
+        move(des, getPieceAt(src));
+        move(src, Piece.createBlank());
+    }
+
 }

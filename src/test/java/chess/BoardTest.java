@@ -19,7 +19,6 @@ class BoardTest {
     @Test
     public void create() throws Exception {
         board.initialize();
-//        assertEquals(32, board.pieceCount());
         String blankRank = appendNewLine("........");
         assertEquals(
                 appendNewLine("RNBQKBNR") +
@@ -114,11 +113,24 @@ class BoardTest {
         ArrayList<Piece> res = board.sortPiecesByScore(Piece.Color.BLACK, false);
         for(Piece piece:res) System.out.println(piece.getScore());
     }
+
+    @Test
+    public void moveTest() throws Exception {
+        board.initialize();
+
+        String sourcePosition = "b2";
+        String targetPosition = "b3";
+        board.move(sourcePosition, targetPosition);
+        assertEquals(Piece.createBlank(), board.getPieceAt(sourcePosition));
+        assertEquals(Piece.createWhitePawn(), board.getPieceAt(targetPosition));
+    }
+
 //    @Test
 //    public void printBoard() {
 //        String board_res = board.print();
 //        System.out.println(board_res);
 //    }
+
 //    @Test
 //    @DisplayName("create board and add pawn")
 //    public void create() throws Exception {
