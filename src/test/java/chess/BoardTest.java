@@ -4,6 +4,7 @@ import chess.pieces.Piece;
 import org.junit.jupiter.api.*;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static utils.StringUtils.appendNewLine;
@@ -45,8 +46,8 @@ class BoardTest {
         assertEquals(board.getPieceCount(Piece.createWhiteQueen()), 1);
         assertEquals(board.getPieceCount(Piece.createBlackKing()), 1);
         assertEquals(board.getPieceCount(Piece.createWhiteKing()), 1);
-
-        assertEquals(board.getPieceCount(Piece.createBlank()), 32);
+//
+        assertEquals(32, board.getPieceCount(Piece.createBlank()));
     }
 
     @Test
@@ -110,7 +111,7 @@ class BoardTest {
         addPiece("e1", Piece.createWhiteRook());
         addPiece("f1", Piece.createWhiteKing());
 
-        ArrayList<Piece> res = board.sortPiecesByScore(Piece.Color.BLACK, false);
+        List<Piece> res = board.sortPiecesByScore(Piece.Color.BLACK, true);
         for(Piece piece:res) System.out.println(piece.getScore());
     }
 

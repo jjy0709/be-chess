@@ -3,26 +3,24 @@ package chess;
 import chess.pieces.Piece;
 
 import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
+import java.util.stream.Stream;
 
 public class Rank {
-    private ArrayList<Piece> pieces;
+    private List<Piece> pieces;
 
     private Rank(){
         this.pieces = new ArrayList<Piece>();
     }
 
     public String getPrint() {
-        StringBuilder stringBuilder = new StringBuilder();
-        for(Piece p: this.pieces) stringBuilder.append(p.getPrint());
-        return stringBuilder.toString();
+        return this.pieces.stream().map(Piece::getPrint).map(p -> Character.toString(p)).collect(Collectors.joining());
     }
 
     public int getPieceCount(Piece p) {
-        int res = 0;
-        for(Piece piece: this.pieces){
-            res += piece.equals(p)?1:0;
-        }
-        return res;
+        return (int) this.pieces.stream().filter(piece -> p.equals(piece)).count();
     }
 
     public Piece getPieceAt(int c) {
@@ -77,38 +75,25 @@ public class Rank {
         return rank;
     }
 
-    public ArrayList<Integer> getPawnPosition(Piece.Color color) {
-        ArrayList<Integer> res = new ArrayList<>();
-        for(int i=0;i<this.pieces.size();i++){
-            Piece piece = this.pieces.get(i);
-            if(piece.getColor() != color) continue;
-            if(piece.getType() == Piece.Type.PAWN) res.add(i);
-        }
-        return res;
+    public IntStream getPawnPosition(Piece.Color color) {
+        return IntStream
+                .range(0, this.pieces.size())
+                .filter(i -> this.pieces.get(i).equals(color == Piece.Color.WHITE?Piece.createWhitePawn():Piece.createBlackPawn()));
     }
 
     public double calculateScore(Piece.Color color) {
-        double res = 0.;
-        for(Piece piece: this.pieces){
-            if(piece.getColor() != color) continue;
-            res += piece.getType().getScore();
-        }
-        return res;
+        return this.pieces.stream()
+                .filter(piece -> piece.getColor() == color)
+                .mapToDouble(piece -> piece.getScore())
+                .sum();
     }
 
     public boolean checkKingAlive(Piece.Color color) {
-        for(Piece piece: this.pieces){
-            if(piece.getColor() != color) continue;
-            if(piece.getType() == Piece.Type.KING) return true;
-        }
-        return false;
+        return this.pieces.stream().anyMatch(piece -> color == Piece.Color.WHITE?piece.equals(Piece.createWhiteKing()):piece.equals(Piece.createBlackKing()));
     }
 
-    public ArrayList<Piece> getPieceOfColor(Piece.Color color) {
-        ArrayList<Piece> res = new ArrayList<>();
-        for(Piece piece: this.pieces){
-            if(piece.getColor() == color) res.add(piece);
-        }
-        return res;
+    public Stream<Piece> getPieceOfColor(Piece.Color color) {
+        return this.pieces.stream()
+                .filter(piece -> piece.getColor() == color);
     }
 }

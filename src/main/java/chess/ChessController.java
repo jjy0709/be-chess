@@ -1,5 +1,7 @@
 package chess;
 
+import chess.pieces.Piece;
+
 import java.util.Scanner;
 
 public class ChessController {
