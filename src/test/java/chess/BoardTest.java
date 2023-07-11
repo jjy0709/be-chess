@@ -68,6 +68,32 @@ class BoardTest {
         assertEquals(Piece.createWhitePawn(), board.getPieceAt(targetPosition));
     }
 
+    @Test
+    public void moveKingQueen() throws Exception {
+        board.initialize();
+
+        //move king
+        assertThrows(Exception.class, () -> {
+            board.move("e1", "e2");         // 이미 white 기물이 있는 위치
+        });
+        assertThrows(Exception.class, () -> {
+            board.move("e1", "e3");         // 킹이 움직일 수 없는 위치
+        });
+        assertThrows(Exception.class, () -> {
+            board.move("e1", "e0");         // 체스판 바깥의 위치
+        });
+
+        assertThrows(Exception.class, () -> {
+            board.move("d1", "e2");         // 이미 white 기물이 있는 위치
+        });
+        assertThrows(Exception.class, () -> {
+            board.move("d1", "e4");         // 킹이 움직일 수 없는 위치
+        });
+        assertThrows(Exception.class, () -> {
+            board.move("d1", "e0");         // 체스판 바깥의 위치
+        });
+    }
+
 //    @Test
 //    public void printBoard() {
 //        String board_res = board.print();

@@ -10,12 +10,16 @@ public class Position {
         this.colum = loc.charAt(0) - 'a';
     }
 
-    public static int distance(Position src, Position des) {
-        return Math.max(Math.abs(src.rank - des.rank), Math.abs(src.colum - des.colum));
+    public int distance(Position des) {
+        return Math.max(Math.abs(this.rank - des.rank), Math.abs(this.colum - des.colum));
     }
 
     public boolean inBoard() {
         if(this.rank > 8 || this.rank < 0 || this.colum > 8 || this.colum < 0) return false;
         return true;
+    }
+
+    public boolean inOneLine(Position des) {
+        return this.colum == des.colum || this.rank == des.rank || Math.abs(this.colum-des.colum) == Math.abs(this.rank-des.rank);
     }
 }

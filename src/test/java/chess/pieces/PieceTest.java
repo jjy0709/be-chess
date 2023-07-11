@@ -1,5 +1,6 @@
 package chess.pieces;
 
+import chess.Position;
 import chess.pieces.Piece.Type;
 
 import org.junit.jupiter.api.*;
@@ -43,6 +44,17 @@ class PieceTest {
 
         Piece blackPawn = Piece.createBlackPawn();
         assertSame(blackPawn.isBlack(), true);
+    }
+
+    @Test
+    public void checkKingQueenMove() {
+        Piece whiteKing = Piece.createWhiteKing();
+        assertEquals(false, whiteKing.verifyMovePiece(new Position("b2"), new Position("d3")));
+        assertEquals(true, whiteKing.verifyMovePiece(new Position("b2"), new Position("c3")));
+
+        Piece blackQueen = Piece.createBlackQueen();
+        assertEquals(false, blackQueen.verifyMovePiece(new Position("b2"), new Position("d3")));
+        assertEquals(true, blackQueen.verifyMovePiece(new Position("b2"), new Position("e5")));
     }
 
 //    @Test

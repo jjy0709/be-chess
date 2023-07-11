@@ -18,7 +18,11 @@ public class ChessController {
             }
             if(input.startsWith("move")){
                 String[] ipts = input.split(" ");
-                board.move(ipts[1], ipts[2]);
+                try {
+                    board.move(ipts[1], ipts[2]);
+                } catch (Exception e) {
+                    System.out.println(e.getMessage());
+                }
                 System.out.println(chessView.view());
             }
             if(input.equals("end")) return;

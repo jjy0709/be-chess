@@ -3,16 +3,13 @@ package chess;
 import chess.pieces.Piece;
 
 import java.util.*;
-import java.util.stream.Collectors;
 import java.util.stream.Stream;
-
-import static chess.Position.distance;
-import static utils.StringUtils.appendNewLine;
 
 public class Board {
     private List<Rank> ranks = new ArrayList<Rank>();
-
-    public Board() { }
+    public Board() {
+        ;
+    }
 
     public void initialize() {
         this.ranks.add(Rank.createBlackPieceRank());
@@ -40,29 +37,19 @@ public class Board {
     }
 
     public void move(String loc, Piece piece) {
-        Position pos = new Position(loc);
-        this.ranks.get(pos.rank).move(pos.colum, piece);
+        Position dst = new Position(loc);
+        this.ranks.get(dst.rank).move(dst.colum, piece);
     }
 
-    public void move(String src, String des) {
-        move(des, getPieceAt(src));
-        move(src, Piece.createBlank());
-    }
-
-    public void moveKing(String src, String des) throws Exception {
+    public void move(String src, String des) throws Exception {
         Position pSrc = new Position(src);
         Position pDes = new Position(des);
+        Piece piece = getPieceAt(src);
         if(!pDes.inBoard()) throw new Exception("Destination out of the board!");
-        if(distance(pSrc,pDes) != 1) throw new Exception("You cannot move king over one block!");
-        if(getPieceAt(src).getColor() == getPieceAt(des).getColor()) throw new Exception("You cannot move your piece to already existing location");
-        move(src, des);
-    }
-
-
-    private boolean checkMovePossible(String loc, Piece piece) {
-        Piece piece1 = getPieceAt(loc);
-        if(piece1.getColor() == piece.getColor()) return false;
-
+        if(piece.getColor() == getPieceAt(des).getColor()) throw new Exception("You cannot move your piece to already existing location");
+        if(!piece.verifyMovePiece(pSrc, pDes)) throw new Exception(String.format("You cannot move %s in that location", piece.getType()));
+        move(des, getPieceAt(src));
+        move(src, Piece.createBlank());
     }
 
 }

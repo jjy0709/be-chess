@@ -1,5 +1,7 @@
 package chess.pieces;
 
+import chess.Position;
+
 public class Piece {
     public enum Color {
         WHITE, BLACK, NOCOLOR;
@@ -37,6 +39,7 @@ public class Piece {
 
     private Color color;
     private Type type;
+    private Position position;
 
 
     private Piece(Color color_, Type type_) {
@@ -134,5 +137,14 @@ public class Piece {
 
     public static Piece createBlank() {
         return new Piece(Color.NOCOLOR, Type.NO_PIECE);
+    }
+
+    public boolean verifyMovePiece(Position src, Position dst) {
+        if (this.type == Type.KING) {
+            if(src.distance(dst) != 1) return false;
+        } else if(this.type == Type.QUEEN) {
+            if(!src.inOneLine(dst)) return false;
+        }
+        return true;
     }
 }
