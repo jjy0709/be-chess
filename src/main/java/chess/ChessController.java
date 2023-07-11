@@ -8,6 +8,7 @@ public class ChessController {
     public static void main(String[] args) {
         Board board = new Board();
         ChessView chessView = new ChessView(board);
+        ChessGame chessGame = new ChessGame(board);
         Scanner sc = new Scanner(System.in);
         String input = sc.nextLine();
 

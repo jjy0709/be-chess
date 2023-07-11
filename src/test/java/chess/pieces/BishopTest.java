@@ -32,11 +32,27 @@ class BishopTest {
     @Test
     @DisplayName("비숍의 움직임 테스트")
     public void checkverifyPosition() {
-        assertEquals(false, white.verifyMovePosition(new Position("c1"), new Position("d1")));
-        assertEquals(true, white.verifyMovePosition(new Position("c1"), new Position("a3")));
+        try {
+            assertEquals(false, white.verifyMovePosition(new Position("c1"), new Position("d1")));
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+        try {
+            assertEquals(true, white.verifyMovePosition(new Position("c1"), new Position("a3")));
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
 
-        assertEquals(false, black.verifyMovePosition(new Position("c8"), new Position("c7")));
-        assertEquals(true, black.verifyMovePosition(new Position("c8"), new Position("e6")));
+        try {
+            assertEquals(false, black.verifyMovePosition(new Position("c8"), new Position("c7")));
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+        try {
+            assertEquals(true, black.verifyMovePosition(new Position("c8"), new Position("e6")));
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
     }
 
 }

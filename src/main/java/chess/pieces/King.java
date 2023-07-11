@@ -18,10 +18,9 @@ public class King extends Piece {
     }
 
     @Override
-    public boolean verifyMovePosition(Position src, Position dst) {
-//        if(src.distance(dst) != 1) return false;
-//        return true;
-        return src.distance(dst) == 1;
+    public void verifyMovePosition(Position source, Position destination) throws Exception {
+        if(source.distance(destination) != 1)
+            throw new Exception(String.format("%s이 이동 가능한 곳이 아닙니다.", this.getType()));
     }
 
 }

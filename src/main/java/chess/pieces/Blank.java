@@ -13,7 +13,7 @@ public class Blank extends Piece {
     }
 
     @Override
-    public boolean verifyMovePosition(Position src, Position dst) {
-        return true;
+    public void verifyMovePosition(Position source, Position destination) throws Exception {
+        return;
     }
 }

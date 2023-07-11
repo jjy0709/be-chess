@@ -1,5 +1,6 @@
 package chess.pieces;
 
+import chess.ChessGame;
 import chess.Position;
 
 public class Pawn extends Piece {
@@ -20,22 +21,39 @@ public class Pawn extends Piece {
     }
 
     @Override
-    public boolean verifyMovePosition(Position src, Position dst) {
+    public void verifyMovePosition(Position source, Position destination) throws Exception {
         // 앞으로만 갈 수 있다.
         // 한 번도 움직이지 않은 폰은 두 칸 움직일 수 있다.
         // 이미 움직인 폰은 한 칸만 움직일 수 있다.(앞이 비었을 때)
-        if (src.col != dst.col) return false;
-        if (this.isWhite() && dst.rank > src.rank) return false;
-        if (this.isBlack() && dst.rank < src.rank) return false;
-        if (this.moved && Math.abs(dst.rank - src.rank) != 1) return false;
-        if (Math.abs(dst.rank - src.rank) > 2) return false;
+        verifyStepDirection(source, destination);
+
+        if(verifySideStep(source, destination))
+            return;
+
+        if (source.col != destination.col)
+            throw new Exception("폰은 앞으로만 움직일 수 있습니다.");
+
+        verifyFirstStep(source, destination);
         this.moved = true;
-        return true;
     }
 
-    public boolean verifyMovePositionBlank(Position src, Position dst) {
-        // 대각선에 적이 있으면 잡으면서 움직일 수 있다. -> 적이 없으면 불가능.
-
-        return true;
+    private boolean verifySideStep(Position source, Position destination) throws Exception {
+        Piece enemy = ChessGame.getPieceAtPosition(destination);
+        if(!enemy.isBlank() && source.distance(destination) == 1
+                    && source.inDiagonal(destination)) return true;
+        return false;
     }
+
+    private void verifyStepDirection(Position source, Position destination) throws Exception {
+        if ((this.isWhite() && destination.rank > source.rank) ||
+                (this.isBlack() && destination.rank < source.rank))
+            throw new Exception("폰은 앞으로만 움직일 수 있습니다.");
+    }
+
+    private void verifyFirstStep(Position source, Position destination) throws Exception {
+        if ((this.moved && Math.abs(destination.rank - source.rank) > 1) ||
+                (Math.abs(destination.rank - source.rank) > 2))
+            throw new Exception("폰은 처음에만 최대 두 칸 움직일 수 있습니다.");
+    }
+
 }

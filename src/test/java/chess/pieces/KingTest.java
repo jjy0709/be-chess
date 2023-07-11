@@ -31,10 +31,26 @@ class KingTest {
     @Test
     @DisplayName("킹의 움직임 테스트")
     public void checkverifyPosition() {
-        assertEquals(false, white.verifyMovePosition(new Position("e1"), new Position("c2")));
-        assertEquals(true, white.verifyMovePosition(new Position("e1"), new Position("e2")));
+        try {
+            assertEquals(false, white.verifyMovePosition(new Position("e1"), new Position("c2")));
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+        try {
+            assertEquals(true, white.verifyMovePosition(new Position("e1"), new Position("e2")));
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
 
-        assertEquals(false, black.verifyMovePosition(new Position("e8"), new Position("e6")));
-        assertEquals(true, black.verifyMovePosition(new Position("e8"), new Position("d8트")));
+        try {
+            assertEquals(false, black.verifyMovePosition(new Position("e8"), new Position("e6")));
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+        try {
+            assertEquals(true, black.verifyMovePosition(new Position("e8"), new Position("d8트")));
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
     }
 }

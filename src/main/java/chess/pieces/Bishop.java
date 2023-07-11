@@ -18,8 +18,9 @@ public class Bishop extends Piece {
     }
 
     @Override
-    public boolean verifyMovePosition(Position src, Position dst) {
-        return src.inDiagonal(dst);
+    public void verifyMovePosition(Position source, Position destination) throws Exception {
+        if (!source.inDiagonal(destination))
+            throw new Exception(String.format("%s이 이동 가능한 곳이 아닙니다.", this.getType()));
     }
 
 }

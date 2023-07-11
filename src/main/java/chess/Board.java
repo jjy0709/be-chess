@@ -1,11 +1,10 @@
 package chess;
 
 import chess.pieces.Blank;
-import chess.pieces.Pawn;
 import chess.pieces.Piece;
 
-import java.util.*;
-import java.util.stream.IntStream;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.stream.Stream;
 
 public class Board {
@@ -50,11 +49,9 @@ public class Board {
         if (piece.getColor() == getPieceAt(destination).getColor())
             throw new Exception("You cannot move your piece to already existing location");
 
-        if (!piece.verifyMovePosition(source, destination))
-            throw new Exception(String.format("You cannot move %s in that location", piece.getType()));
+        piece.verifyMovePosition(source, destination);
         if (!piece.isKnight() && !checkPathToDestination(source, destination))
             throw new Exception("path blocked to that location");
-        if (piece.isPawn()) ((Pawn) piece).verifyMovePositionBlank(source, destination);
 
         movePiece(destination, getPieceAt(source));
         movePiece(source, Blank.createBlank());

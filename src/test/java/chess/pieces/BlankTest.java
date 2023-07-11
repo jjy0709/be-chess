@@ -27,10 +27,26 @@ class BlankTest {
     @Test
     @DisplayName("빈 칸은 어디든지 움직일 수 있다.")
     public void checkverifyPosition() {
-        assertEquals(true, blank.verifyMovePosition(new Position("c1"), new Position("d1")));
-        assertEquals(true, blank.verifyMovePosition(new Position("c1"), new Position("a3")));
+        try {
+            assertEquals(true, blank.verifyMovePosition(new Position("c1"), new Position("d1")));
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+        try {
+            assertEquals(true, blank.verifyMovePosition(new Position("c1"), new Position("a3")));
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
 
-        assertEquals(true, blank.verifyMovePosition(new Position("c8"), new Position("c7")));
-        assertEquals(true, blank.verifyMovePosition(new Position("c8"), new Position("e6")));
+        try {
+            assertEquals(true, blank.verifyMovePosition(new Position("c8"), new Position("c7")));
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+        try {
+            assertEquals(true, blank.verifyMovePosition(new Position("c8"), new Position("e6")));
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
     }
 }

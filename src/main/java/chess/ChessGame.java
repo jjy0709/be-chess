@@ -1,6 +1,7 @@
 package chess;
 
 import chess.pieces.Piece;
+import chess.pieces.Piece.*;
 
 import java.util.Comparator;
 import java.util.HashMap;
@@ -9,30 +10,40 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 public class ChessGame {
-    Board board;
+    static Board board;
 
     public ChessGame(Board board) {
         this.board = board;
     }
 
-    // gameInit 랑 다른 여러 함수 더 구현해야될듯..
+    public ChessGame() {
+        this.board = new Board();
+    }
 
-    public double calculateScore(Piece.Color color) {
+    public void init() {
+        this.board.initialize();
+    }
+
+    public void emptyInit() {
+        this.board.initializeEmpty();
+    }
+
+    public double calculateScore(Color color) {
         if (!checkKingAlive(color)) return 0.;
         return calculatePointSum(color) + calculatePenaltyPoint(color);
     }
 
-    private boolean checkKingAlive(Piece.Color color) {
+    private boolean checkKingAlive(Color color) {
         return this.board.getRank().anyMatch(r -> r.checkKingAlive(color));
     }
 
-    private double calculatePointSum(Piece.Color color) {
+    private double calculatePointSum(Color color) {
         return this.board.getRank()
                 .mapToDouble(r -> r.calculateScore(color))
                 .sum();
     }
 
-    private double calculatePenaltyPoint(Piece.Color color) {
+    private double calculatePenaltyPoint(Color color) {
         Map<Integer, Long> pawnCnt = this.board.getRank()
                 .flatMapToInt(r->r.getPawnPosition(color))
                  .boxed()
@@ -44,12 +55,16 @@ public class ChessGame {
                 .sum();
     }
 
-    public List<Piece> sortPiecesByScore(Piece.Color color, boolean asend) {
+    public List<Piece> sortPiecesByScore(Color color, boolean asend) {
         Comparator cmp = asend ? Comparator.comparing(Piece::getScore)
                 : Comparator.comparing(Piece::getScore).reversed();
 
         return this.board.getRank()
                 .flatMap(r -> r.getPieceOfColor(color))
                 .sorted(cmp).toList();
+    }
+
+    public static Piece getPieceAtPosition(Position position) {
+        return board.getPieceAt(position);
     }
 }

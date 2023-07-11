@@ -30,11 +30,27 @@ class QueenTest {
     @Test
     @DisplayName("퀸의 움직임 테스트")
     public void checkverifyPosition() {
-        assertEquals(false, white.verifyMovePosition(new Position("d1"), new Position("a3")));
-        assertEquals(true, white.verifyMovePosition(new Position("d1"), new Position("d8")));
+        try {
+            assertEquals(false, white.verifyMovePosition(new Position("d1"), new Position("a3")));
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+        try {
+            assertEquals(true, white.verifyMovePosition(new Position("d1"), new Position("d8")));
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
 
-        assertEquals(false, black.verifyMovePosition(new Position("d8"), new Position("e2")));
-        assertEquals(true, black.verifyMovePosition(new Position("d8"), new Position("h4")));
+        try {
+            assertEquals(false, black.verifyMovePosition(new Position("d8"), new Position("e2")));
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+        try {
+            assertEquals(true, black.verifyMovePosition(new Position("d8"), new Position("h4")));
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
     }
 
 }

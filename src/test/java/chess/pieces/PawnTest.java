@@ -30,13 +30,37 @@ class PawnTest {
     @Test
     @DisplayName("폰의 움직임 테스트")
     public void checkverifyPosition() {
-        assertEquals(true, white.verifyMovePosition(new Position("c2"), new Position("c4")));
-        assertEquals(false, white.verifyMovePosition(new Position("c4"), new Position("c6")));
-        assertEquals(true, white.verifyMovePosition(new Position("c4"), new Position("c5")));
+        try {
+            assertEquals(true, white.verifyMovePosition(new Position("c2"), new Position("c4")));
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+        try {
+            assertEquals(false, white.verifyMovePosition(new Position("c4"), new Position("c6")));
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+        try {
+            assertEquals(true, white.verifyMovePosition(new Position("c4"), new Position("c5")));
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
 
-        assertEquals(true, black.verifyMovePosition(new Position("e7"), new Position("e5")));
-        assertEquals(false, black.verifyMovePosition(new Position("e5"), new Position("e3")));
-        assertEquals(true, black.verifyMovePosition(new Position("e5"), new Position("e4")));
+        try {
+            assertEquals(true, black.verifyMovePosition(new Position("e7"), new Position("e5")));
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+        try {
+            assertEquals(false, black.verifyMovePosition(new Position("e5"), new Position("e3")));
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+        try {
+            assertEquals(true, black.verifyMovePosition(new Position("e5"), new Position("e4")));
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
     }
 
 }

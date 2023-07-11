@@ -87,7 +87,7 @@ abstract public class Piece {
         return this.color == piece.color && this.type == piece.type;
     }
 
-    public abstract boolean verifyMovePosition(Position src, Position dst);
+    public abstract void verifyMovePosition(Position source, Position destination) throws Exception;
 
 //    public boolean verifyMovePiece(Position src, Position dst) {
 //        if (this.type == Type.KING) {
