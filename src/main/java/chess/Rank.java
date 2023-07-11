@@ -1,6 +1,6 @@
 package chess;
 
-import chess.pieces.Piece;
+import chess.pieces.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -33,52 +33,52 @@ public class Rank {
 
     public static Rank createBlackPawnRank() {
         Rank rank = new Rank();
-        for(int i=0;i<8;i++) rank.pieces.add(Piece.createBlackPawn());
+        for(int i=0;i<8;i++) rank.pieces.add(Pawn.createBlack());
         return rank;
     }
 
     public static Rank createBlackPieceRank() {
         Rank rank = new Rank();
-        rank.pieces.add(Piece.createBlackRook());
-        rank.pieces.add(Piece.createBlackKnight());
-        rank.pieces.add(Piece.createBlackBishop());
-        rank.pieces.add(Piece.createBlackQueen());
-        rank.pieces.add(Piece.createBlackKing());
-        rank.pieces.add(Piece.createBlackBishop());
-        rank.pieces.add(Piece.createBlackKnight());
-        rank.pieces.add(Piece.createBlackRook());
+        rank.pieces.add(Rook.createBlack());
+        rank.pieces.add(Knight.createBlack());
+        rank.pieces.add(Bishop.createBlack());
+        rank.pieces.add(Queen.createBlack());
+        rank.pieces.add(King.createBlack());
+        rank.pieces.add(Bishop.createBlack());
+        rank.pieces.add(Knight.createBlack());
+        rank.pieces.add(Rook.createBlack());
         return rank;
     }
 
     public static Rank createWhitePawnRank() {
         Rank rank = new Rank();
-        for(int i=0;i<8;i++) rank.pieces.add(Piece.createWhitePawn());
+        for(int i=0;i<8;i++) rank.pieces.add(Pawn.createWhite());
         return rank;
     }
 
     public static Rank createWhitePieceRank() {
         Rank rank = new Rank();
-        rank.pieces.add(Piece.createWhiteRook());
-        rank.pieces.add(Piece.createWhiteKnight());
-        rank.pieces.add(Piece.createWhiteBishop());
-        rank.pieces.add(Piece.createWhiteQueen());
-        rank.pieces.add(Piece.createWhiteKing());
-        rank.pieces.add(Piece.createWhiteBishop());
-        rank.pieces.add(Piece.createWhiteKnight());
-        rank.pieces.add(Piece.createWhiteRook());
+        rank.pieces.add(Rook.createWhite());
+        rank.pieces.add(Knight.createWhite());
+        rank.pieces.add(Bishop.createWhite());
+        rank.pieces.add(Queen.createWhite());
+        rank.pieces.add(King.createWhite());
+        rank.pieces.add(Bishop.createWhite());
+        rank.pieces.add(Knight.createWhite());
+        rank.pieces.add(Rook.createWhite());
         return rank;
     }
 
     public static Rank createBlankRank() {
         Rank rank = new Rank();
-        for (int i=0;i<8;i++) rank.pieces.add(Piece.createBlank());
+        for (int i=0;i<8;i++) rank.pieces.add(Blank.createBlank());
         return rank;
     }
 
     public IntStream getPawnPosition(Piece.Color color) {
         return IntStream
                 .range(0, this.pieces.size())
-                .filter(i -> this.pieces.get(i).equals(color == Piece.Color.WHITE?Piece.createWhitePawn():Piece.createBlackPawn()));
+                .filter(i -> this.pieces.get(i).equals(color == Piece.Color.WHITE?Pawn.createWhite():Pawn.createBlack()));
     }
 
     public double calculateScore(Piece.Color color) {
@@ -89,7 +89,7 @@ public class Rank {
     }
 
     public boolean checkKingAlive(Piece.Color color) {
-        return this.pieces.stream().anyMatch(piece -> color == Piece.Color.WHITE?piece.equals(Piece.createWhiteKing()):piece.equals(Piece.createBlackKing()));
+        return this.pieces.stream().anyMatch(piece -> color == Piece.Color.WHITE?piece.equals(King.createWhite()):piece.equals(King.createBlack()));
     }
 
     public Stream<Piece> getPieceOfColor(Piece.Color color) {
