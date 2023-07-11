@@ -14,7 +14,7 @@ public class Queen extends Piece{
     public static Queen createBlack() { return new Queen(Color.BLACK); }
 
     @Override
-    boolean verifyMovePosition(Position src, Position dst) {
+    public boolean verifyMovePosition(Position src, Position dst) {
 //        if(!src.inOneLine(dst)) return false;
 //        return true;
         return src.inOneLine(dst);

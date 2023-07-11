@@ -1,6 +1,6 @@
 package chess;
 
-import chess.pieces.Piece;
+import chess.pieces.*;
 import org.junit.jupiter.api.*;
 
 import java.util.ArrayList;
@@ -20,30 +20,30 @@ class BoardTest {
     @Test
     public void verifyPieceCount() {
         board.initialize();
-        assertEquals(board.getPieceCount(Piece.createBlackPawn()), 8);
-        assertEquals(board.getPieceCount(Piece.createWhitePawn()), 8);
-        assertEquals(board.getPieceCount(Piece.createBlackKnight()), 2);
-        assertEquals(board.getPieceCount(Piece.createWhiteKnight()), 2);
-        assertEquals(board.getPieceCount(Piece.createBlackBishop()), 2);
-        assertEquals(board.getPieceCount(Piece.createWhiteBishop()), 2);
-        assertEquals(board.getPieceCount(Piece.createBlackRook()), 2);
-        assertEquals(board.getPieceCount(Piece.createWhiteRook()), 2);
-        assertEquals(board.getPieceCount(Piece.createBlackQueen()), 1);
-        assertEquals(board.getPieceCount(Piece.createWhiteQueen()), 1);
-        assertEquals(board.getPieceCount(Piece.createBlackKing()), 1);
-        assertEquals(board.getPieceCount(Piece.createWhiteKing()), 1);
+        assertEquals(board.getPieceCount(Pawn.createBlack()), 8);
+        assertEquals(board.getPieceCount(Pawn.createWhite()), 8);
+        assertEquals(board.getPieceCount(Knight.createBlack()), 2);
+        assertEquals(board.getPieceCount(Knight.createWhite()), 2);
+        assertEquals(board.getPieceCount(Bishop.createBlack()), 2);
+        assertEquals(board.getPieceCount(Bishop.createWhite()), 2);
+        assertEquals(board.getPieceCount(Rook.createBlack()), 2);
+        assertEquals(board.getPieceCount(Rook.createWhite()), 2);
+        assertEquals(board.getPieceCount(Queen.createBlack()), 1);
+        assertEquals(board.getPieceCount(Queen.createWhite()), 1);
+        assertEquals(board.getPieceCount(King.createBlack()), 1);
+        assertEquals(board.getPieceCount(King.createWhite()), 1);
 //
-        assertEquals(32, board.getPieceCount(Piece.createBlank()));
+        assertEquals(32, board.getPieceCount(Blank.createBlank()));
     }
 
     @Test
     public void referPieceByLocation() {
         board.initialize();
 
-        assertEquals(Piece.createBlackRook(), board.getPieceAt("a8"));
-        assertEquals(Piece.createBlackRook(), board.getPieceAt("h8"));
-        assertEquals(Piece.createWhiteRook(), board.getPieceAt("a1"));
-        assertEquals(Piece.createWhiteRook(), board.getPieceAt("h1"));
+        assertEquals(Rook.createBlack(), board.getPieceAt("h8"));
+        assertEquals(Rook.createBlack(), board.getPieceAt("a8"));
+        assertEquals(Rook.createWhite(), board.getPieceAt("a1"));
+        assertEquals(Rook.createWhite(), board.getPieceAt("h1"));
     }
 
     @Test
@@ -51,7 +51,7 @@ class BoardTest {
         board.initializeEmpty();
 
         String position = "b5";
-        Piece piece = Piece.createBlackRook();
+        Piece piece = Rook.createBlack();
         board.move(position, piece);
 
         assertEquals(piece, board.getPieceAt(position));
@@ -64,8 +64,8 @@ class BoardTest {
         String sourcePosition = "b2";
         String targetPosition = "b3";
         board.move(sourcePosition, targetPosition);
-        assertEquals(Piece.createBlank(), board.getPieceAt(sourcePosition));
-        assertEquals(Piece.createWhitePawn(), board.getPieceAt(targetPosition));
+        assertEquals(Blank.createBlank(), board.getPieceAt(sourcePosition));
+        assertEquals(Pawn.createWhite(), board.getPieceAt(targetPosition));
     }
 
     @Test

@@ -14,8 +14,8 @@ public class Bishop extends Piece {
     public static Bishop createBlack() { return new Bishop(Color.BLACK); }
 
     @Override
-    boolean verifyMovePosition(Position src, Position dst) {
-        return false;
+    public boolean verifyMovePosition(Position src, Position dst) {
+        return src.inDiagonal(dst);
     }
 
 }

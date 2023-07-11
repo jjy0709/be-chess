@@ -13,7 +13,7 @@ public class Pawn extends Piece {
     public static Pawn createBlack() { return new Pawn(Color.BLACK); }
 
     @Override
-    boolean verifyMovePosition(Position src, Position dst) {
-        return false;
+    public boolean verifyMovePosition(Position src, Position dst) {
+        return true;
     }
 }

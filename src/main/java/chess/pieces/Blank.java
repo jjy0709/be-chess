@@ -11,7 +11,7 @@ public class Blank extends Piece {
     public static Blank createBlank() { return new Blank(Color.NOCOLOR); }
 
     @Override
-    boolean verifyMovePosition(Position src, Position dst) {
+    public boolean verifyMovePosition(Position src, Position dst) {
         return true;
     }
 }

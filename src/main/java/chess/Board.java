@@ -1,5 +1,6 @@
 package chess;
 
+import chess.pieces.Blank;
 import chess.pieces.Piece;
 
 import java.util.*;
@@ -44,12 +45,16 @@ public class Board {
     public void move(String src, String des) throws Exception {
         Position pSrc = new Position(src);
         Position pDes = new Position(des);
+
         Piece piece = getPieceAt(src);
+
         if(!pDes.inBoard()) throw new Exception("Destination out of the board!");
         if(piece.getColor() == getPieceAt(des).getColor()) throw new Exception("You cannot move your piece to already existing location");
-        if(!piece.verifyMovePiece(pSrc, pDes)) throw new Exception(String.format("You cannot move %s in that location", piece.getType()));
+
+        if(!piece.verifyMovePosition(pSrc, pDes)) throw new Exception(String.format("You cannot move %s in that location", piece.getType()));
+
         move(des, getPieceAt(src));
-        move(src, Piece.createBlank());
+        move(src, Blank.createBlank());
     }
 
 }

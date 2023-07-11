@@ -82,7 +82,7 @@ abstract public class Piece {
         return this.color == piece.color && this.type == piece.type;
     }
 
-    abstract boolean verifyMovePosition(Position src, Position dst);
+    public abstract boolean verifyMovePosition(Position src, Position dst);
 
 //    public boolean verifyMovePiece(Position src, Position dst) {
 //        if (this.type == Type.KING) {

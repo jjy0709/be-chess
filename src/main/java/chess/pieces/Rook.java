@@ -13,7 +13,7 @@ public class Rook extends Piece {
     public static Rook createBlack() { return new Rook(Color.BLACK); }
 
     @Override
-    boolean verifyMovePosition(Position src, Position dst) {
+    public boolean verifyMovePosition(Position src, Position dst) {
         return false;
     }
 }

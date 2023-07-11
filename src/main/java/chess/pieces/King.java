@@ -17,7 +17,7 @@ public class King extends Piece {
     }
 
     @Override
-    boolean verifyMovePosition(Position src, Position dst) {
+    public boolean verifyMovePosition(Position src, Position dst) {
 //        if(src.distance(dst) != 1) return false;
 //        return true;
         return src.distance(dst) == 1;

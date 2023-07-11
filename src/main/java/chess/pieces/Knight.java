@@ -13,7 +13,7 @@ public class Knight extends Piece {
     public static Knight createBlack() { return new Knight(Color.BLACK); }
 
     @Override
-    boolean verifyMovePosition(Position src, Position dst) {
+    public boolean verifyMovePosition(Position src, Position dst) {
         return false;
     }
 }

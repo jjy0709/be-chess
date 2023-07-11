@@ -19,7 +19,15 @@ public class Position {
         return true;
     }
 
+    public boolean inDiagonal(Position des) {
+        return Math.abs(this.colum-des.colum) == Math.abs(this.rank-des.rank);
+    }
+
+    public boolean inStraight(Position des) {
+        return this.colum == des.colum || this.rank == des.rank;
+    }
+
     public boolean inOneLine(Position des) {
-        return this.colum == des.colum || this.rank == des.rank || Math.abs(this.colum-des.colum) == Math.abs(this.rank-des.rank);
+        return this.inStraight(des) || this.inDiagonal(des);
     }
 }
