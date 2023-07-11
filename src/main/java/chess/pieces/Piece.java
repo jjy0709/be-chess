@@ -2,8 +2,6 @@ package chess.pieces;
 
 import chess.Position;
 
-import java.time.Period;
-
 abstract public class Piece {
     public enum Color {
         WHITE, BLACK, NOCOLOR;
@@ -39,16 +37,11 @@ abstract public class Piece {
         }
     }
 
-    Color color;
-    Type type;
+    protected Color color;
+    protected Type type;
 
-    Piece(Color color) {
+    protected Piece(Color color) {
         this.color = color;
-    }
-
-    private Piece(Color color, Type type) {
-        this.color = color;
-        this.type = type;
     }
 
     public Color getColor() {
@@ -63,7 +56,7 @@ abstract public class Piece {
         return this.type.getScore();
     }
 
-    public char getPrint() {
+    public char getRepresentation() {
         if (this.color != Color.BLACK) return this.type.getWhiteRepresentation();
         return this.type.getBlackRepresentation();
     }
@@ -74,6 +67,18 @@ abstract public class Piece {
 
     public boolean isBlack() {
         return this.color == Color.BLACK;
+    }
+
+    public boolean isKnight() {
+        return this.type == Type.KNIGHT;
+    }
+
+    public boolean isPawn() {
+        return this.type == Type.PAWN;
+    }
+
+    public boolean isBlank() {
+        return this.type == Type.NO_PIECE;
     }
 
     public boolean equals(Object p) {

@@ -8,7 +8,9 @@ public class Blank extends Piece {
         this.type = Type.NO_PIECE;
     }
 
-    public static Blank createBlank() { return new Blank(Color.NOCOLOR); }
+    public static Blank createBlank() {
+        return new Blank(Color.NOCOLOR);
+    }
 
     @Override
     public boolean verifyMovePosition(Position src, Position dst) {

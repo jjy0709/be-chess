@@ -1,7 +1,6 @@
 package chess.pieces;
 
 import chess.Position;
-import chess.pieces.Piece.Type;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -25,8 +24,8 @@ class KingTest {
     @Test
     @DisplayName("킹의 representation 테스트")
     public void getRepresentation() {
-        assertEquals('k', white.getPrint());
-        assertEquals('K', black.getPrint());
+        assertEquals('k', white.getRepresentation());
+        assertEquals('K', black.getRepresentation());
     }
 
     @Test

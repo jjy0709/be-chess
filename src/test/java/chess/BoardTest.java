@@ -40,19 +40,19 @@ class BoardTest {
     public void referPieceByLocation() {
         board.initialize();
 
-        assertEquals(Rook.createBlack(), board.getPieceAt("h8"));
-        assertEquals(Rook.createBlack(), board.getPieceAt("a8"));
-        assertEquals(Rook.createWhite(), board.getPieceAt("a1"));
-        assertEquals(Rook.createWhite(), board.getPieceAt("h1"));
+        assertEquals(Rook.createBlack(), board.getPieceAt(new Position("h8")));
+        assertEquals(Rook.createBlack(), board.getPieceAt(new Position("a8")));
+        assertEquals(Rook.createWhite(), board.getPieceAt(new Position("a1")));
+        assertEquals(Rook.createWhite(), board.getPieceAt(new Position("h1")));
     }
 
     @Test
     public void move() throws Exception {
         board.initializeEmpty();
 
-        String position = "b5";
+        Position position = new Position("b5");
         Piece piece = Rook.createBlack();
-        board.move(position, piece);
+        board.movePiece(position, piece);
 
         assertEquals(piece, board.getPieceAt(position));
     }
@@ -61,8 +61,8 @@ class BoardTest {
     public void moveTest() throws Exception {
         board.initialize();
 
-        String sourcePosition = "b2";
-        String targetPosition = "b3";
+        Position sourcePosition = new Position("b2");
+        Position targetPosition = new Position("b3");
         board.move(sourcePosition, targetPosition);
         assertEquals(Blank.createBlank(), board.getPieceAt(sourcePosition));
         assertEquals(Pawn.createWhite(), board.getPieceAt(targetPosition));
@@ -74,23 +74,23 @@ class BoardTest {
 
         //move king
         assertThrows(Exception.class, () -> {
-            board.move("e1", "e2");         // 이미 white 기물이 있는 위치
+            board.move(new Position("e1"), new Position("e2"));         // 이미 white 기물이 있는 위치
         });
         assertThrows(Exception.class, () -> {
-            board.move("e1", "e3");         // 킹이 움직일 수 없는 위치
+            board.move(new Position("e1"), new Position("e3"));         // 킹이 움직일 수 없는 위치
         });
         assertThrows(Exception.class, () -> {
-            board.move("e1", "e0");         // 체스판 바깥의 위치
+            board.move(new Position("e1"), new Position("e0"));         // 체스판 바깥의 위치
         });
 
         assertThrows(Exception.class, () -> {
-            board.move("d1", "e2");         // 이미 white 기물이 있는 위치
+            board.move(new Position("d1"), new Position("e2"));         // 이미 white 기물이 있는 위치
         });
         assertThrows(Exception.class, () -> {
-            board.move("d1", "e4");         // 킹이 움직일 수 없는 위치
+            board.move(new Position("d1"), new Position("e4"));         // 킹이 움직일 수 없는 위치
         });
         assertThrows(Exception.class, () -> {
-            board.move("d1", "e0");         // 체스판 바깥의 위치
+            board.move(new Position("d1"), new Position("e0"));         // 체스판 바깥의 위치
         });
     }
 

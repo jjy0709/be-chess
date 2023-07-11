@@ -8,9 +8,13 @@ public class Rook extends Piece {
         this.type = Type.ROOK;
     }
 
-    public static Rook createWhite() { return new Rook(Color.WHITE); }
+    public static Rook createWhite() {
+        return new Rook(Color.WHITE);
+    }
 
-    public static Rook createBlack() { return new Rook(Color.BLACK); }
+    public static Rook createBlack() {
+        return new Rook(Color.BLACK);
+    }
 
     @Override
     public boolean verifyMovePosition(Position src, Position dst) {

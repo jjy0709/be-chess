@@ -11,29 +11,29 @@ import java.util.stream.Stream;
 public class Rank {
     private List<Piece> pieces;
 
-    private Rank(){
+    private Rank() {
         this.pieces = new ArrayList<Piece>();
     }
 
     public String getPrint() {
-        return this.pieces.stream().map(Piece::getPrint).map(p -> Character.toString(p)).collect(Collectors.joining());
+        return this.pieces.stream().map(Piece::getRepresentation).map(p -> Character.toString(p)).collect(Collectors.joining());
     }
 
     public int getPieceCount(Piece p) {
         return (int) this.pieces.stream().filter(piece -> p.equals(piece)).count();
     }
 
-    public Piece getPieceAt(int c) {
-        return this.pieces.get(c);
+    public Piece getPieceAt(Position position) {
+        return this.pieces.get(position.col);
     }
 
-    public void move(int c, Piece piece) {
-        this.pieces.set(c, piece);
+    public void move(Position position, Piece piece) {
+        this.pieces.set(position.col, piece);
     }
 
     public static Rank createBlackPawnRank() {
         Rank rank = new Rank();
-        for(int i=0;i<8;i++) rank.pieces.add(Pawn.createBlack());
+        for (int i = 0; i < 8; i++) rank.pieces.add(Pawn.createBlack());
         return rank;
     }
 
@@ -52,7 +52,7 @@ public class Rank {
 
     public static Rank createWhitePawnRank() {
         Rank rank = new Rank();
-        for(int i=0;i<8;i++) rank.pieces.add(Pawn.createWhite());
+        for (int i = 0; i < 8; i++) rank.pieces.add(Pawn.createWhite());
         return rank;
     }
 
@@ -71,14 +71,14 @@ public class Rank {
 
     public static Rank createBlankRank() {
         Rank rank = new Rank();
-        for (int i=0;i<8;i++) rank.pieces.add(Blank.createBlank());
+        for (int i = 0; i < 8; i++) rank.pieces.add(Blank.createBlank());
         return rank;
     }
 
     public IntStream getPawnPosition(Piece.Color color) {
         return IntStream
                 .range(0, this.pieces.size())
-                .filter(i -> this.pieces.get(i).equals(color == Piece.Color.WHITE?Pawn.createWhite():Pawn.createBlack()));
+                .filter(i -> this.pieces.get(i).equals(color == Piece.Color.WHITE ? Pawn.createWhite() : Pawn.createBlack()));
     }
 
     public double calculateScore(Piece.Color color) {
@@ -89,7 +89,7 @@ public class Rank {
     }
 
     public boolean checkKingAlive(Piece.Color color) {
-        return this.pieces.stream().anyMatch(piece -> color == Piece.Color.WHITE?piece.equals(King.createWhite()):piece.equals(King.createBlack()));
+        return this.pieces.stream().anyMatch(piece -> color == Piece.Color.WHITE ? piece.equals(King.createWhite()) : piece.equals(King.createBlack()));
     }
 
     public Stream<Piece> getPieceOfColor(Piece.Color color) {

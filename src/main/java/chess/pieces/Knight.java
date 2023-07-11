@@ -8,9 +8,13 @@ public class Knight extends Piece {
         this.type = Type.KNIGHT;
     }
 
-    public static Knight createWhite() { return new Knight(Color.WHITE); }
+    public static Knight createWhite() {
+        return new Knight(Color.WHITE);
+    }
 
-    public static Knight createBlack() { return new Knight(Color.BLACK); }
+    public static Knight createBlack() {
+        return new Knight(Color.BLACK);
+    }
 
     @Override
     public boolean verifyMovePosition(Position src, Position dst) {

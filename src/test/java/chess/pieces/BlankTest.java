@@ -21,7 +21,7 @@ class BlankTest {
     @Test
     @DisplayName("빈 칸의 representation 테스트")
     public void getRepresentation() {
-        assertEquals('.', blank.getPrint());
+        assertEquals('.', blank.getRepresentation());
     }
 
     @Test

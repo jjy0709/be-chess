@@ -23,8 +23,8 @@ class QueenTest {
     @Test
     @DisplayName("퀸의 representation 테스트")
     public void getRepresentation() {
-        assertEquals('q', white.getPrint());
-        assertEquals('Q', black.getPrint());
+        assertEquals('q', white.getRepresentation());
+        assertEquals('Q', black.getRepresentation());
     }
 
     @Test

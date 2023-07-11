@@ -23,8 +23,8 @@ class PawnTest {
     @Test
     @DisplayName("폰의 representation 테스트")
     public void getRepresentation() {
-        assertEquals('p', white.getPrint());
-        assertEquals('P', black.getPrint());
+        assertEquals('p', white.getRepresentation());
+        assertEquals('P', black.getRepresentation());
     }
 
     @Test

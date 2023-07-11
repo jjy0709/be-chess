@@ -25,8 +25,8 @@ class BishopTest {
     @Test
     @DisplayName("비숍의 representation 테스트")
     public void getRepresentation() {
-        assertEquals('b', white.getPrint());
-        assertEquals('B', black.getPrint());
+        assertEquals('b', white.getRepresentation());
+        assertEquals('B', black.getRepresentation());
     }
 
     @Test

@@ -30,7 +30,7 @@ class ChessGameTest {
     }
 
     private void addPiece(String position, Piece piece) {
-        board.move(position, piece);
+        board.movePiece(new Position(position), piece);
     }
 
     @Test

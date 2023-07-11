@@ -9,9 +9,13 @@ public class Bishop extends Piece {
         this.type = Type.BISHOP;
     }
 
-    public static Bishop createWhite() { return new Bishop(Color.WHITE); }
+    public static Bishop createWhite() {
+        return new Bishop(Color.WHITE);
+    }
 
-    public static Bishop createBlack() { return new Bishop(Color.BLACK); }
+    public static Bishop createBlack() {
+        return new Bishop(Color.BLACK);
+    }
 
     @Override
     public boolean verifyMovePosition(Position src, Position dst) {

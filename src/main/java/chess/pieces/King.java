@@ -8,6 +8,7 @@ public class King extends Piece {
         super(color);
         this.type = Type.KING;
     }
+
     public static King createWhite() {
         return new King(Color.WHITE);
     }

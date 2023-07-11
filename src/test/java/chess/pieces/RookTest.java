@@ -23,8 +23,8 @@ class RookTest {
     @Test
     @DisplayName("룩의 representation 테스트")
     public void getRepresentation() {
-        assertEquals('r', white.getPrint());
-        assertEquals('R', black.getPrint());
+        assertEquals('r', white.getRepresentation());
+        assertEquals('R', black.getRepresentation());
     }
 
     @Test

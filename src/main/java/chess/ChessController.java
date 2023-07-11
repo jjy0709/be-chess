@@ -11,21 +11,21 @@ public class ChessController {
         Scanner sc = new Scanner(System.in);
         String input = sc.nextLine();
 
-        while(true){
-            if(input.equals("start")){
+        while (true) {
+            if (input.equals("start")) {
                 board.initialize();
                 System.out.println(chessView.view());
             }
-            if(input.startsWith("move")){
-                String[] ipts = input.split(" ");
+            if (input.startsWith("move")) {
+                String[] inputSplit = input.split(" ");
                 try {
-                    board.move(ipts[1], ipts[2]);
+                    board.move(new Position(inputSplit[1]), new Position(inputSplit[2]));
                 } catch (Exception e) {
                     System.out.println(e.getMessage());
                 }
                 System.out.println(chessView.view());
             }
-            if(input.equals("end")) return;
+            if (input.equals("end")) return;
             input = sc.nextLine();
         }
 

@@ -23,8 +23,8 @@ class KnightTest {
     @Test
     @DisplayName("나이트의 representation 테스트")
     public void getRepresentation() {
-        assertEquals('n', white.getPrint());
-        assertEquals('N', black.getPrint());
+        assertEquals('n', white.getRepresentation());
+        assertEquals('N', black.getRepresentation());
     }
 
     @Test

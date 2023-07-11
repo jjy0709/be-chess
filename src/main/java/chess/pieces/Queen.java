@@ -2,16 +2,20 @@ package chess.pieces;
 
 import chess.Position;
 
-public class Queen extends Piece{
+public class Queen extends Piece {
 
     private Queen(Color color) {
         super(color);
         this.type = Type.QUEEN;
     }
 
-    public static Queen createWhite() { return new Queen(Color.WHITE); }
+    public static Queen createWhite() {
+        return new Queen(Color.WHITE);
+    }
 
-    public static Queen createBlack() { return new Queen(Color.BLACK); }
+    public static Queen createBlack() {
+        return new Queen(Color.BLACK);
+    }
 
     @Override
     public boolean verifyMovePosition(Position src, Position dst) {
