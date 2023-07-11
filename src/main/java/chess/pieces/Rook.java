@@ -14,6 +14,6 @@ public class Rook extends Piece {
 
     @Override
     public boolean verifyMovePosition(Position src, Position dst) {
-        return false;
+        return src.inStraight(dst);
     }
 }

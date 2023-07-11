@@ -14,6 +14,6 @@ public class Knight extends Piece {
 
     @Override
     public boolean verifyMovePosition(Position src, Position dst) {
-        return false;
+        return src.distance(dst) == 2 && !src.inOneLine(dst);
     }
 }
