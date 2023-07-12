@@ -1,13 +1,11 @@
 package chess;
 
+import chess.Board.Board;
+import chess.Board.Position;
 import chess.pieces.*;
 import org.junit.jupiter.api.*;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import static org.junit.jupiter.api.Assertions.*;
-import static utils.StringUtils.appendNewLine;
 
 class BoardTest {
     private Board board;

@@ -1,11 +1,14 @@
-package chess;
+package chess.Board;
 
 import chess.pieces.Blank;
 import chess.pieces.Piece;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
+
+import static utils.StringUtils.appendNewLine;
 
 public class Board {
     private List<Rank> ranks = new ArrayList<Rank>();
@@ -30,6 +33,13 @@ public class Board {
         return this.ranks.stream();
     }
 
+    public String getBoardString() {
+        return this.ranks.stream()
+                .map(Rank::getPrint)
+                .map(p -> appendNewLine(p))
+                .collect(Collectors.joining());
+    }
+
     public int getPieceCount(Piece p) {
         return this.ranks.stream().mapToInt(r -> r.getPieceCount(p)).sum();
     }
@@ -43,21 +53,33 @@ public class Board {
     }
 
     public void move(Position source, Position destination) throws Exception {
-        Piece piece = getPieceAt(source);
+        Piece pieceSource = getPieceAt(source);
+        Piece pieceDestination = getPieceAt(destination);
 
-        if (!destination.inBoard()) throw new Exception("Destination out of the board!");
-        if (piece.getColor() == getPieceAt(destination).getColor())
-            throw new Exception("You cannot move your piece to already existing location");
+        checkDestinationRange(destination);
 
-        piece.verifyMovePosition(source, destination);
-        if (!piece.isKnight() && !checkPathToDestination(source, destination))
-            throw new Exception("path blocked to that location");
+        checkDestinationPieceColor(pieceSource, pieceDestination);
+
+        pieceSource.verifyMovePosition(source, destination);
+
+        if (!pieceSource.isKnight())
+            checkPathToDestination(source, destination);
 
         movePiece(destination, getPieceAt(source));
         movePiece(source, Blank.createBlank());
     }
 
-    private boolean checkPathToDestination(Position source, Position destination) {
+    private void checkDestinationRange(Position destination) throws Exception {
+        if (!destination.inBoard())
+            throw new Exception("기물을 보드 밖으로 이동시킬 수 없습니다.");
+    }
+
+    private void checkDestinationPieceColor(Piece sourcePiece, Piece destinationPiece) throws Exception {
+        if (sourcePiece.getColor() == destinationPiece.getColor())
+            throw new Exception("이미 같은 색의 기물이 존재하는 위치입니다.");
+    }
+
+    private void checkPathToDestination(Position source, Position destination) throws Exception {
         int columnDiff = destination.col - source.col;
         int rankDiff = destination.rank - source.rank;
         int stepNumber = Math.max(Math.abs(columnDiff), Math.abs(rankDiff));
@@ -68,13 +90,8 @@ public class Board {
         for (int i = 1; i < stepNumber; i++) {
             Position tmp = source.addDeltaStep(deltaColumn * i, deltaRank * i);
             if (!getPieceAt(tmp).equals(Blank.createBlank()))
-                return false;
+                throw new Exception(String.format("%s은 다른 기물을 넘어 이동할 수 없습니다."));
         }
-        return true;
-
-//        IntStream rankRange = IntStream.range(source.rank + 1, destination.rank);
-//        IntStream colRange = IntStream.range(source.col + 1, destination.col);
-//
 
     }
 

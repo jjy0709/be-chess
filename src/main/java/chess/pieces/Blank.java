@@ -1,6 +1,6 @@
 package chess.pieces;
 
-import chess.Position;
+import chess.Board.Position;
 
 public class Blank extends Piece {
     private Blank(Color color) {

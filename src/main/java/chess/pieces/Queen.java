@@ -1,6 +1,6 @@
 package chess.pieces;
 
-import chess.Position;
+import chess.Board.Position;
 
 public class Queen extends Piece {
 
@@ -19,9 +19,7 @@ public class Queen extends Piece {
 
     @Override
     public void verifyMovePosition(Position source, Position destination) throws Exception {
-//        if(!src.inOneLine(dst)) return false;
-//        return true;
-        if(!source.inOneLine(destination))
+        if (!source.inOneLine(destination))
             throw new Exception(String.format("%s이 이동 가능한 곳이 아닙니다.", this.getType()));
     }
 }

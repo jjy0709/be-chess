@@ -1,6 +1,6 @@
 package chess.pieces;
 
-import chess.Position;
+import chess.Board.Position;
 
 abstract public class Piece {
     public enum Color {
@@ -73,10 +73,6 @@ abstract public class Piece {
         return this.type == Type.KNIGHT;
     }
 
-    public boolean isPawn() {
-        return this.type == Type.PAWN;
-    }
-
     public boolean isBlank() {
         return this.type == Type.NO_PIECE;
     }
@@ -89,12 +85,4 @@ abstract public class Piece {
 
     public abstract void verifyMovePosition(Position source, Position destination) throws Exception;
 
-//    public boolean verifyMovePiece(Position src, Position dst) {
-//        if (this.type == Type.KING) {
-//            if(src.distance(dst) != 1) return false;
-//        } else if(this.type == Type.QUEEN) {
-//            if(!src.inOneLine(dst)) return false;
-//        }
-//        return true;
-//    }
 }

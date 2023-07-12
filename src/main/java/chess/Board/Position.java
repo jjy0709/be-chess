@@ -1,7 +1,4 @@
-package chess;
-
-import java.util.List;
-import java.util.stream.Stream;
+package chess.Board;
 
 public class Position {
     public int rank;

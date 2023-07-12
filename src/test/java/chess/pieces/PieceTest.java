@@ -1,8 +1,5 @@
 package chess.pieces;
 
-import chess.Position;
-import chess.pieces.Piece.Type;
-
 import org.junit.jupiter.api.*;
 import static org.junit.jupiter.api.Assertions.*;
 

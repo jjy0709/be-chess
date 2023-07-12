@@ -1,5 +1,6 @@
 package chess;
 
+import chess.Board.Position;
 import chess.pieces.*;
 import org.junit.jupiter.api.Test;
 
@@ -8,12 +9,11 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.*;
 
 class ChessGameTest {
-    private Board board = new Board();
-    private ChessGame chessGame = new ChessGame(board);
+    private ChessGame chessGame = new ChessGame();
 
     @Test
     public void caculcatePoint() throws Exception {
-        board.initializeEmpty();
+        chessGame.initializeEmpty();
 
         addPiece("b6", Pawn.createBlack());
         addPiece("e6", Queen.createBlack());
@@ -25,8 +25,8 @@ class ChessGameTest {
         addPiece("e1", Rook.createWhite());
         addPiece("f1", King.createWhite());
 
-        assertEquals(15.0, chessGame.calculateScore(Piece.Color.BLACK), 0.01);
-        assertEquals(7.0, chessGame.calculateScore(Piece.Color.WHITE), 0.01);
+        assertEquals(15.0, chessGame.getGameScoreOf(Piece.Color.BLACK), 0.01);
+        assertEquals(7.0, chessGame.getGameScoreOf(Piece.Color.WHITE), 0.01);
     }
 
     private void addPiece(String position, Piece piece) {

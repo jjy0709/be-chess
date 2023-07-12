@@ -5,7 +5,7 @@ import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.*;
 
-class HelloTest {
+class MainTest {
 
     @Test
     @DisplayName("간단 테스트")

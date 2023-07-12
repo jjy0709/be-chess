@@ -1,18 +1,16 @@
 package chess;
 
-import chess.Board;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
 import static utils.StringUtils.appendNewLine;
 
 class ChessViewTest {
-    Board board = new Board();
-    ChessView chessView = new ChessView(board);
+    ChessGame chessGame = new ChessGame();
+    ChessView chessView = new ChessView(chessGame);
 
     @Test
     public void seeChessViewOperates() {
-        board.initialize();
+        chessGame.initialize();
         String blankRank = appendNewLine("........");
         assertEquals(
                 appendNewLine("RNBQKBNR") +
@@ -20,7 +18,7 @@ class ChessViewTest {
                         blankRank + blankRank + blankRank + blankRank +
                         appendNewLine("pppppppp") +
                         appendNewLine("rnbqkbnr"),
-                chessView.view()
+                chessView.showBoard()
         );
     }
 

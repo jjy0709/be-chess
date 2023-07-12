@@ -1,19 +1,33 @@
 package chess;
 
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
-
-import static utils.StringUtils.appendNewLine;
+import chess.pieces.Piece.Color;
 
 public class ChessView {
-    private Board board;
+    private ChessGame chessGame;
 
-    public ChessView(Board board) {
-        this.board = board;
+    public ChessView(ChessGame chessGame) {
+        this.chessGame = chessGame;
     }
 
-    // void로 하고 출력까지 하는 게 더 맞는 것 같다 / String 반환하면 테스트하기 편함
-    public String view() {
-        return board.getRank().map(Rank::getPrint).map(p -> appendNewLine(p)).collect(Collectors.joining());
+    public void showGetInput() {
+        System.out.println("명령어를 입력하세요.");
+    }
+
+    public void showStart() {
+        showGetInput();
+        System.out.println("게임이 시작되었습니다.");
+    }
+
+    public void showWrongInput() {
+        System.out.println("잘못된 입력입니다.");
+    }
+
+    public void showBoard() {
+        System.out.println(chessGame.getBoardRepresentation());
+    }
+
+    public void showGameScore() {
+        System.out.println(String.format("WHITE 점수: %.1f", chessGame.getGameScoreOf(Color.WHITE)));
+        System.out.println(String.format("BLACK 점수: %.1f", chessGame.getGameScoreOf(Color.BLACK)));
     }
 }

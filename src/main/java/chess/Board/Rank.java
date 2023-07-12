@@ -1,4 +1,4 @@
-package chess;
+package chess.Board;
 
 import chess.pieces.*;
 
@@ -16,11 +16,16 @@ public class Rank {
     }
 
     public String getPrint() {
-        return this.pieces.stream().map(Piece::getRepresentation).map(p -> Character.toString(p)).collect(Collectors.joining());
+        return this.pieces.stream()
+                .map(Piece::getRepresentation)
+                .map(p -> Character.toString(p))
+                .collect(Collectors.joining());
     }
 
     public int getPieceCount(Piece p) {
-        return (int) this.pieces.stream().filter(piece -> p.equals(piece)).count();
+        return (int) this.pieces.stream()
+                .filter(piece -> p.equals(piece))
+                .count();
     }
 
     public Piece getPieceAt(Position position) {
@@ -78,7 +83,10 @@ public class Rank {
     public IntStream getPawnPosition(Piece.Color color) {
         return IntStream
                 .range(0, this.pieces.size())
-                .filter(i -> this.pieces.get(i).equals(color == Piece.Color.WHITE ? Pawn.createWhite() : Pawn.createBlack()));
+                .filter(i -> this.pieces.get(i).equals(
+                        color == Piece.Color.WHITE ?
+                                Pawn.createWhite() : Pawn.createBlack())
+                );
     }
 
     public double calculateScore(Piece.Color color) {
@@ -89,7 +97,11 @@ public class Rank {
     }
 
     public boolean checkKingAlive(Piece.Color color) {
-        return this.pieces.stream().anyMatch(piece -> color == Piece.Color.WHITE ? piece.equals(King.createWhite()) : piece.equals(King.createBlack()));
+        return this.pieces.stream()
+                .anyMatch(piece ->
+                        color == Piece.Color.WHITE ?
+                                piece.equals(King.createWhite()) : piece.equals(King.createBlack())
+                );
     }
 
     public Stream<Piece> getPieceOfColor(Piece.Color color) {
