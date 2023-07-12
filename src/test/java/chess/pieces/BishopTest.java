@@ -1,8 +1,7 @@
 package chess.pieces;
 
-import chess.Board.Position;
+import chess.board.Position;
 import chess.pieces.Piece.Type;
-
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -13,46 +12,30 @@ class BishopTest {
     Bishop black = Bishop.createBlack();
 
     @Test
-    @DisplayName("각 색의 비숍 생성")
-    public void create_piece() {
+    @DisplayName("비숍을 생성하여 타입, 색, 표현 문자를 테스트한다.")
+    void createPiece() {
         assertTrue(white.isWhite());
         assertTrue(black.isBlack());
 
         assertEquals(Type.BISHOP, white.getType());
         assertEquals(Type.BISHOP, black.getType());
-    }
 
-    @Test
-    @DisplayName("비숍의 representation 테스트")
-    public void getRepresentation() {
         assertEquals('b', white.getRepresentation());
         assertEquals('B', black.getRepresentation());
     }
 
     @Test
-    @DisplayName("비숍의 움직임 테스트")
-    public void checkverifyPosition() {
-        try {
-            assertEquals(false, white.verifyMovePosition(new Position("c1"), new Position("d1")));
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }
-        try {
-            assertEquals(true, white.verifyMovePosition(new Position("c1"), new Position("a3")));
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }
+    @DisplayName("비숍을 잘못된 위치로 이동시켰을 때 예외가 발생해야 한다.")
+    void checkVerifyPositionThrowsException() {
+        assertThrows(Exception.class, () -> white.verifyMovePosition(new Position("c1"), new Position("d1")));
+        assertThrows(Exception.class, () -> black.verifyMovePosition(new Position("c8"), new Position("c7")));
+    }
 
-        try {
-            assertEquals(false, black.verifyMovePosition(new Position("c8"), new Position("c7")));
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }
-        try {
-            assertEquals(true, black.verifyMovePosition(new Position("c8"), new Position("e6")));
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }
+    @Test
+    @DisplayName("비숍을 올바른 위치로 이동시켰을 때 예외가 발생하지 않아야 한다.")
+    void checkVerifyPositionDoesNotThrowException() {
+        assertDoesNotThrow(() -> white.verifyMovePosition(new Position("c1"), new Position("a3")));
+        assertDoesNotThrow(() -> black.verifyMovePosition(new Position("c8"), new Position("e6")));
     }
 
 }

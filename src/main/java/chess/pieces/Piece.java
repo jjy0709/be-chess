@@ -1,6 +1,6 @@
 package chess.pieces;
 
-import chess.Board.Position;
+import chess.board.Position;
 
 abstract public class Piece {
     public enum Color {

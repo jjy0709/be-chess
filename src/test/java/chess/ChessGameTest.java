@@ -1,18 +1,18 @@
 package chess;
 
-import chess.Board.Position;
+import chess.board.Position;
 import chess.pieces.*;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class ChessGameTest {
-    private ChessGame chessGame = new ChessGame();
+    ChessGame chessGame = new ChessGame();
 
     @Test
-    public void caculcatePoint() throws Exception {
+    void calculatePoint() {
         chessGame.initializeEmpty();
 
         addPiece("b6", Pawn.createBlack());
@@ -30,13 +30,12 @@ class ChessGameTest {
     }
 
     private void addPiece(String position, Piece piece) {
-        board.movePiece(new Position(position), piece);
+        chessGame.movePiece(new Position(position), piece);
     }
 
     @Test
-    public void sortPieceAscend() {
-//        board.initialize();
-        board.initializeEmpty();
+    void sortPieceAscend() {
+        chessGame.initializeEmpty();
 
         addPiece("b6", Pawn.createBlack());
         addPiece("e6", Queen.createBlack());
@@ -50,5 +49,6 @@ class ChessGameTest {
 
         List<Piece> res = chessGame.sortPiecesByScore(Piece.Color.BLACK, true);
         res.stream().map(p -> p.getScore()).forEach(System.out::println);
+        // List contain 해서 첫번째 꺼의 점수랑 비 assertThat에 containsExactly로 순서 검증
     }
 }

@@ -1,7 +1,7 @@
 package chess;
 
-import chess.Board.Board;
-import chess.Board.Position;
+import chess.board.Board;
+import chess.board.Position;
 import chess.pieces.Piece;
 import chess.pieces.Piece.Color;
 
@@ -61,12 +61,18 @@ public class ChessGame {
                 .sorted(cmp).toList();
     }
 
-    public static boolean checkPieceColorDiffer(Piece piece, Position position) {
-        return board.getPieceAt(position).getColor() != piece.getColor();
+    public static boolean checkPieceExist(Position position) {
+        return !(board.getPieceAt(position).isBlank());
     }
 
     public void move(Position source, Position destination) throws Exception {
+        if (board.getPieceAt(source).isBlank())
+            throw new Exception("빈 칸은 이동할 수 없습니다.");
         board.move(source, destination);
+    }
+
+    public void movePiece(Position position, Piece piece) {
+        board.movePiece(position, piece);
     }
 
     public String getBoardRepresentation() {

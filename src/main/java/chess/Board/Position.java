@@ -1,4 +1,4 @@
-package chess.Board;
+package chess.board;
 
 public class Position {
     public int rank;

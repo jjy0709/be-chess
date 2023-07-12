@@ -1,22 +1,22 @@
-package chess;
+package chess.board;
 
-import chess.Board.Board;
-import chess.Board.Position;
 import chess.pieces.*;
-import org.junit.jupiter.api.*;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 class BoardTest {
-    private Board board;
+    Board board;
 
     @BeforeEach
-    public void setup() {
+    void setup() {
         board = new Board();
     }
 
     @Test
-    public void verifyPieceCount() {
+    void verifyPieceCount() {
         board.initialize();
         assertEquals(board.getPieceCount(Pawn.createBlack()), 8);
         assertEquals(board.getPieceCount(Pawn.createWhite()), 8);
@@ -35,7 +35,7 @@ class BoardTest {
     }
 
     @Test
-    public void referPieceByLocation() {
+    void referPieceByLocation() {
         board.initialize();
 
         assertEquals(Rook.createBlack(), board.getPieceAt(new Position("h8")));
@@ -45,7 +45,7 @@ class BoardTest {
     }
 
     @Test
-    public void move() throws Exception {
+    void move() throws Exception {
         board.initializeEmpty();
 
         Position position = new Position("b5");
@@ -56,18 +56,18 @@ class BoardTest {
     }
 
     @Test
-    public void moveTest() throws Exception {
+    void moveTest() throws Exception {
         board.initialize();
 
-        Position sourcePosition = new Position("b2");
-        Position targetPosition = new Position("b3");
+        Position sourcePosition = new Position("b1");
+        Position targetPosition = new Position("c3");
         board.move(sourcePosition, targetPosition);
         assertEquals(Blank.createBlank(), board.getPieceAt(sourcePosition));
-        assertEquals(Pawn.createWhite(), board.getPieceAt(targetPosition));
+        assertEquals(Knight.createWhite(), board.getPieceAt(targetPosition));
     }
 
     @Test
-    public void moveKingQueen() throws Exception {
+    void moveKingQueen() throws Exception {
         board.initialize();
 
         //move king
@@ -92,41 +92,4 @@ class BoardTest {
         });
     }
 
-//    @Test
-//    public void printBoard() {
-//        String board_res = board.print();
-//        System.out.println(board_res);
-//    }
-
-//    @Test
-//    @DisplayName("create board and add pawn")
-//    public void create() throws Exception {
-//        verifyAddPawn(Pawn.WHITE, 1);
-//        verifyAddPawn(Pawn.BLACK, 2);
-//    }
-
-//    public void verifyAddPawn(String color, int order) throws Exception {
-//        Pawn pawn = new Pawn(color);
-////        board.add(pawn);
-//        assertEquals(order, board.size());
-//        assertEquals(pawn, board.findPawn(order-1));
-//    }
-
-//    @Test
-//    @DisplayName("add other object to board")
-//    public void create_other() throws Exception {
-//        assertThatThrownBy(() -> {
-//            board.add(new Integer(7));
-//        }).isInstanceOf(InputMismatchException.class)
-//                .hasMessage("Not Pawn");
-//    }
-
-//    @Test
-//    @DisplayName("find Pawn not exist")
-//    public void find_err() throws Exception {
-//        assertThatThrownBy(() -> {
-//            board.findPawn(1);
-//        }).isInstanceOf(RuntimeException.class)
-//                .hasMessage("Invalid Index");
-//    }
 }

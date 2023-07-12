@@ -23,7 +23,7 @@ public class ChessView {
     }
 
     public void showBoard() {
-        System.out.println(chessGame.getBoardRepresentation());
+        System.out.print(chessGame.getBoardRepresentation());
     }
 
     public void showGameScore() {

@@ -1,6 +1,6 @@
 package softeer2nd;
 
-import chess.Board.Position;
+import chess.board.Position;
 import chess.ChessGame;
 import chess.ChessView;
 
@@ -20,14 +20,11 @@ public class Main {
         while (true) {
             if (input.equals(START)) {
                 start();
-            }
-            else if (input.startsWith(MOVE)) {
+            } else if (input.startsWith(MOVE)) {
                 move(input);
-            }
-            else if (input.equals(SCORE)) {
+            } else if (input.equals(SCORE)) {
                 chessView.showGameScore();
-            }
-            else if (input.equals(END))
+            } else if (input.equals(END))
                 return;
             else {
                 chessView.showWrongInput();

@@ -1,4 +1,4 @@
-package chess.Board;
+package chess.board;
 
 import chess.pieces.Blank;
 import chess.pieces.Piece;
@@ -14,19 +14,22 @@ public class Board {
     private List<Rank> ranks = new ArrayList<Rank>();
 
     public Board() {
+        for (int i = 0; i < 8; i++)
+            this.ranks.add(Rank.createBlankRank());
     }
 
     public void initialize() {
-        this.ranks.add(Rank.createBlackPieceRank());
-        this.ranks.add(Rank.createBlackPawnRank());
-        for (int i = 0; i < 4; i++)
-            this.ranks.add(Rank.createBlankRank());
-        this.ranks.add(Rank.createWhitePawnRank());
-        this.ranks.add(Rank.createWhitePieceRank());
+        this.ranks.set(0, Rank.createBlackPieceRank());
+        this.ranks.set(1, Rank.createBlackPawnRank());
+        for (int i = 2; i < 6; i++)
+            this.ranks.set(i, Rank.createBlankRank());
+        this.ranks.set(6, Rank.createWhitePawnRank());
+        this.ranks.set(7, Rank.createWhitePieceRank());
     }
 
     public void initializeEmpty() {
-        for (int i = 0; i < 8; i++) this.ranks.add(Rank.createBlankRank());
+        for (int i = 0; i < 8; i++)
+            this.ranks.set(i, Rank.createBlankRank());
     }
 
     public Stream<Rank> getRank() {

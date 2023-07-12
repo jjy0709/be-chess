@@ -1,6 +1,6 @@
 package chess.pieces;
 
-import chess.Board.Position;
+import chess.board.Position;
 
 public class Rook extends Piece {
     private Rook(Color color) {
