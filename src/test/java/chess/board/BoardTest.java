@@ -8,8 +8,6 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.EnumSource;
 
-import java.lang.reflect.Method;
-
 import static chess.pieces.Enums.Color.BLACK;
 import static chess.pieces.Enums.Color.WHITE;
 import static org.junit.jupiter.api.Assertions.*;
@@ -64,22 +62,17 @@ class BoardTest {
     void getPawnCountOfEachColumn(Color color) {
         int[] actual = {1,1,1,1,1,1,1,1};
         assertArrayEquals(actual, board.getPawnCountOfEachColumn(color));
+
+        board.movePiece(new Position("c3"), Pawn.createWhite());
+        board.movePiece(new Position("c6"), Pawn.createBlack());
+        int[] actual2 = {1,1,2,1,1,1,1,1};
+        assertArrayEquals(actual2, board.getPawnCountOfEachColumn(color));
+
+        board.movePiece(new Position("f3"), Pawn.createWhite());
+        board.movePiece(new Position("f6"), Pawn.createBlack());
+        int[] actual3 = {1,1,2,1,1,2,1,1};
+        assertArrayEquals(actual3, board.getPawnCountOfEachColumn(color));
     }
-
-    @Test
-    @DisplayName("게임의 턴에 맞지 않는 말을 움직일 수 없다.")
-    void verifyGameTurnCorrect() throws NoSuchMethodException {
-        Class<Board> clazz = Board.class;
-        Method checkGameTurnCorrect = clazz.getDeclaredMethod("checkGameTurnCorrect", Piece.class, Color.class);
-        checkGameTurnCorrect.setAccessible(true);
-
-        assertThrows(IllegalArgumentException.class, ()
-                -> checkGameTurnCorrect.invoke(Pawn.createWhite(), BLACK));
-        assertThrowsExactly(IllegalArgumentException.class, ()
-                        -> checkGameTurnCorrect.invoke(Pawn.createBlack(), WHITE),
-                String.format("%s의 차례입니다.", WHITE.toString()));
-    }
-
 
     /**
      * Board의 move 테스트
@@ -103,22 +96,42 @@ class BoardTest {
     @Test
     @DisplayName("다른 색의 차례일 경우 자신의 말을 움직일 수 없다.")
     void moveAtNotRightTurn() {
-        Position source = new Position("b2");
-        Position destination = new Position("b3");
+        Position whiteSource = new Position("b2");
+        Position whiteDestination = new Position("b3");
+        Position blackSource = new Position("e7");
+        Position blackDestination = new Position("e5");
 
         assertThrows(IllegalArgumentException.class, () -> {
-            board.move(source, destination, BLACK);
+            board.move(whiteSource, whiteDestination, BLACK);
+        });
+        assertDoesNotThrow(() -> {
+            board.move(whiteSource, whiteDestination, WHITE);
+        });
+        assertThrows(IllegalArgumentException.class, () -> {
+            board.move(blackSource, blackDestination, WHITE);
+        });
+        assertDoesNotThrow(() -> {
+            board.move(blackSource, blackDestination, BLACK);
         });
     }
 
     @Test
     @DisplayName("같은 색의 기물이 있는 위치에 기물을 이동시킬 수 없다.")
     void moveSameColorPiecePosition() {
-        Position source = new Position("a1");
-        Position destination = new Position("a2");
+        Position rookSource = new Position("a1");
+        Position rookDestination = new Position("a2");
+        Position knightSource = new Position("g8");
+        Position knightDestination = new Position("e7");
+        Position knightPossiblePosition = new Position("h6");
 
         assertThrows(IllegalArgumentException.class, () -> {
-            board.move(source, destination, WHITE);
+            board.move(rookSource, rookDestination, WHITE);
+        });
+        assertThrows(IllegalArgumentException.class, () -> {
+            board.move(knightSource, knightDestination, BLACK);
+        });
+        assertDoesNotThrow(() -> {
+            board.move(knightSource, knightPossiblePosition, BLACK);
         });
     }
 
@@ -143,13 +156,27 @@ class BoardTest {
     }
 
     @Test
-    @DisplayName("한 기물은 다른 기물을 넘어 이동할 수 없다.")
+    @DisplayName("나이트를 제외한 기물은 다른 기물을 넘어 이동할 수 없다.")
     void moveOverOtherPiece() {
         Position rookPosition = new Position("a1");
-        Position moveTo = new Position("a3");
+        Position rookMoveTo = new Position("a3");
+
+        Position queenPosition = new Position("e8");
+        Position queenMoveTo = new Position("b5");
+
+        Position knightPosition = new Position("g1");
+        Position knightMoveTo = new Position("f3");
 
         assertThrows(IllegalArgumentException.class, () -> {
-            board.move(rookPosition, moveTo, WHITE);
+            board.move(rookPosition, rookMoveTo, WHITE);
+        });
+
+        assertThrows(IllegalArgumentException.class, () -> {
+            board.move(queenPosition, queenMoveTo, BLACK);
+        });
+
+        assertDoesNotThrow(() -> {
+            board.move(knightPosition, knightMoveTo, WHITE);
         });
     }
 

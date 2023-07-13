@@ -4,17 +4,16 @@ import chess.pieces.Blank;
 import chess.pieces.Enums.Color;
 import chess.pieces.Pawn;
 import chess.pieces.Piece;
+import utils.StringUtils;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
 import static utils.ExceptionUtils.*;
-import static utils.StringUtils.appendNewLine;
 
 public class Board {
-    private List<Rank> ranks = new ArrayList<Rank>();
+    private final List<Rank> ranks = new ArrayList<Rank>();
     public static final int BOARD_ROW = 8;
     public static final int BOARD_COLUMN = 8;
 
@@ -57,7 +56,7 @@ public class Board {
     public String getBoardString() {
         return this.ranks.stream()
                 .map(Rank::getPrint)
-                .map(p -> appendNewLine(p))
+                .map(StringUtils::appendNewLine)
                 .collect(Collectors.joining());
     }
 
