@@ -65,11 +65,14 @@ public class ChessGame {
                 .toList();
     }
 
-    public void move(String source, String destination) throws IllegalArgumentException {
+    public void move(String source, String destination) throws RuntimeException {
         Position sourcePosition = new Position(source);
         Position destinationPosition = new Position(destination);
         checkPositionRange(sourcePosition, destinationPosition);
         board.move(sourcePosition, destinationPosition, this.gameTurn);
+        if(!checkKingAlive(getOpposite(this.gameTurn))) {
+            throw new RuntimeException(String.format("%s 이(가) 이겼습니다.", this.gameTurn));
+        }
         this.gameTurn = getOpposite(this.gameTurn);
     }
 

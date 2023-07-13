@@ -81,9 +81,9 @@ public class Board {
         Piece pieceSource = getPieceAt(source);
         Piece pieceDestination = getPieceAt(destination);
 
-        checkGameTurnCorrect(pieceSource, gameTurn);
-
         checkSourceIsBlank(pieceSource);
+
+        checkGameTurnCorrect(pieceSource, gameTurn);
 
         checkDestinationPieceColor(pieceSource, pieceDestination);
 
@@ -98,7 +98,7 @@ public class Board {
     }
 
     private void checkGameTurnCorrect(Piece sourcePiece, Color gameTurn) {
-        if(!sourcePiece.isColor(gameTurn)) {
+        if (!sourcePiece.isColor(gameTurn)) {
             throw getExceptionNotRightTurn(gameTurn);
         }
     }

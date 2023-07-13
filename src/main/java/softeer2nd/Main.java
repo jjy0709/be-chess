@@ -12,6 +12,7 @@ public class Main {
     private static ChessGame chessGame = new ChessGame(new Board());
     private static ChessView chessView = new ChessView();
     private static boolean gameStarted = false;
+    private static boolean gameEnded = false;
 
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
@@ -34,6 +35,10 @@ public class Main {
                 chessView.showWrongInput();
             }
 
+            if(gameEnded){
+                return;
+            }
+
             chessView.showGetInput();
             input = sc.nextLine();
         }
@@ -52,6 +57,9 @@ public class Main {
             chessGame.move(inputSplit[1], inputSplit[2]);
         } catch (IllegalArgumentException exception) {
             System.out.println(exception.getMessage());
+        } catch (RuntimeException exception) {
+            System.out.println(exception.getMessage());
+            gameEnded = true;
         }
         chessView.showGameBoard(chessGame);
     }
