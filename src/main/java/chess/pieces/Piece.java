@@ -113,6 +113,6 @@ abstract public class Piece {
         return this.color == piece.color && this.type == piece.type;
     }
 
-    public abstract void verifyMovePosition(Position source, Position destination) throws Exception;
+    public abstract void verifyMovePosition(Position source, Position destination) throws IllegalArgumentException;
 
 }

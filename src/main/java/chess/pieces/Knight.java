@@ -2,6 +2,8 @@ package chess.pieces;
 
 import chess.board.Position;
 
+import static utils.ExceptionUtils.getExceptionForPieceNotMove;
+
 public class Knight extends Piece {
     private Knight(Color color) {
         super(color);
@@ -17,9 +19,9 @@ public class Knight extends Piece {
     }
 
     @Override
-    public void verifyMovePosition(Position source, Position destination) throws Exception {
+    public void verifyMovePosition(Position source, Position destination) throws IllegalArgumentException {
         if (!(source.distance(destination) == 2 && !source.inOneLine(destination))) {
-            throw new Exception(String.format("%s가 이동 가능한 곳이 아닙니다.", this.getType()));
+            throw getExceptionForPieceNotMove(this);
         }
     }
 }

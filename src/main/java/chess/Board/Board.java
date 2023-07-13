@@ -9,6 +9,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+import static utils.ExceptionUtils.*;
 import static utils.StringUtils.appendNewLine;
 
 public class Board {
@@ -68,7 +69,7 @@ public class Board {
         this.ranks.get(position.rank).move(position, piece);
     }
 
-    public void move(Position source, Position destination) throws Exception {
+    public void move(Position source, Position destination) throws IllegalArgumentException {
         Piece pieceSource = getPieceAt(source);
         Piece pieceDestination = getPieceAt(destination);
 
@@ -86,20 +87,20 @@ public class Board {
         movePiece(source, Blank.createBlank());
     }
 
-    private void checkDestinationRange(Position destination) throws Exception {
+    private void checkDestinationRange(Position destination) throws IllegalArgumentException {
         if (!destination.inBoard()) {
-            throw new Exception("기물을 보드 밖으로 이동시킬 수 없습니다.");
+            throw new IllegalArgumentException(CANNOT_MOVE_OUT_BOARD);
         }
     }
 
-    private void checkDestinationPieceColor(Piece sourcePiece, Piece destinationPiece) throws Exception {
+    private void checkDestinationPieceColor(Piece sourcePiece, Piece destinationPiece) throws IllegalArgumentException {
         if (sourcePiece.isSameColor(destinationPiece)) {
-            throw new Exception("이미 같은 색의 기물이 존재하는 위치입니다.");
+            throw new IllegalArgumentException(ALREADY_PIECE_EXIST);
         }
     }
 
     private void verifyPieceMovePosition(Position source, Position destination, Piece pieceSource,
-                                         Piece pieceDestination) throws Exception {
+                                         Piece pieceDestination) throws IllegalArgumentException {
         if (pieceSource.isPawn() && !pieceDestination.isBlank()) {
             ((Pawn) pieceSource).verifyMovePositionWhenEnemyExist(source, destination);
             return;
@@ -107,7 +108,7 @@ public class Board {
         pieceSource.verifyMovePosition(source, destination);
     }
 
-    private void checkPathToDestination(Position source, Position destination) throws Exception {
+    private void checkPathToDestination(Position source, Position destination) throws IllegalArgumentException {
         int columnDiff = destination.column - source.column;
         int rankDiff = destination.rank - source.rank;
         int stepNumber = Math.max(Math.abs(columnDiff), Math.abs(rankDiff));
@@ -118,7 +119,7 @@ public class Board {
         for (int step = 1; step < stepNumber; step++) {
             Position tmp = source.addDeltaStep(deltaColumn * step, deltaRank * step);
             if (!getPieceAt(tmp).isBlank()) {
-                throw new Exception(String.format("%s은 다른 기물을 넘어 이동할 수 없습니다."));
+                throw getExceptionForJumpOtherPiece(getPieceAt(tmp));
             }
         }
 

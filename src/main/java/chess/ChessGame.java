@@ -11,6 +11,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
+import static utils.ExceptionUtils.CANNOT_MOVE_BLANK;
+
 public class ChessGame {
     private Board board;
 
@@ -68,9 +70,9 @@ public class ChessGame {
                 .sorted(cmp).toList();
     }
 
-    public void move(Position source, Position destination) throws Exception {
+    public void move(Position source, Position destination) throws IllegalArgumentException {
         if (board.getPieceAt(source).isBlank()) {
-            throw new Exception("빈 칸은 이동할 수 없습니다.");
+            throw new IllegalArgumentException(CANNOT_MOVE_BLANK);
         }
         board.move(source, destination);
     }

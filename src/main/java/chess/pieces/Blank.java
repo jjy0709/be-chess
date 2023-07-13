@@ -13,7 +13,7 @@ public class Blank extends Piece {
     }
 
     @Override
-    public void verifyMovePosition(Position source, Position destination) throws Exception {
+    public void verifyMovePosition(Position source, Position destination) throws IllegalArgumentException {
         return;
     }
 }
