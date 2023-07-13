@@ -7,7 +7,7 @@ import chess.pieces.Enums.Type;
 import static utils.ExceptionUtils.getExceptionForPieceNotMove;
 
 public class Pawn extends Piece {
-    Boolean moved;
+    private Boolean moved;
 
     private Pawn(Color color) {
         super(color);
