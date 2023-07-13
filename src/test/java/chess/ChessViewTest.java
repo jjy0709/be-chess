@@ -1,5 +1,6 @@
 package chess;
 
+import chess.board.Board;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -10,8 +11,8 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static utils.StringUtils.appendNewLine;
 
 class ChessViewTest {
-    ChessGame chessGame = new ChessGame();
-    ChessView chessView = new ChessView(chessGame);
+    ChessGame chessGame = new ChessGame(new Board());
+    ChessView chessView = new ChessView();
 
     PrintStream printStream = System.out;
     ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
@@ -24,7 +25,7 @@ class ChessViewTest {
     @Test
     void seeChessViewOperates() {
         chessGame.initialize();
-        chessView.showBoard();
+        chessView.showGameBoard(chessGame);
 
         String blankRank = appendNewLine("........");
         assertEquals(

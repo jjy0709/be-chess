@@ -1,5 +1,6 @@
 package softeer2nd;
 
+import chess.board.Board;
 import chess.board.Position;
 import chess.ChessGame;
 import chess.ChessView;
@@ -9,8 +10,9 @@ import java.util.Scanner;
 import static utils.StringUtils.*;
 
 public class Main {
-    private static ChessGame chessGame = new ChessGame();
-    private static ChessView chessView = new ChessView(chessGame);
+    private static ChessGame chessGame = new ChessGame(new Board());
+    private static ChessView chessView = new ChessView();
+    private static boolean gameStarted = false;
 
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
@@ -20,13 +22,16 @@ public class Main {
         while (true) {
             if (input.equals(START)) {
                 start();
+            } else if (!gameStarted ){
+                chessView.showNotStarted();
             } else if (input.startsWith(MOVE)) {
                 move(input);
             } else if (input.equals(SCORE)) {
-                chessView.showGameScore();
-            } else if (input.equals(END))
+                chessView.showGameScore(chessGame);
+            } else if (input.equals(END)) {
+                gameStarted = false;
                 return;
-            else {
+            } else {
                 chessView.showWrongInput();
             }
 
@@ -38,7 +43,8 @@ public class Main {
 
     private static void start() {
         chessGame.initialize();
-        chessView.showBoard();
+        chessView.showGameBoard(chessGame);
+        gameStarted = true;
     }
 
     private static void move(String input) {
@@ -48,6 +54,6 @@ public class Main {
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
-        chessView.showBoard();
+        chessView.showGameBoard(chessGame);
     }
 }

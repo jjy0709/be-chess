@@ -8,6 +8,8 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
+import static chess.board.Board.BOARD_COLUMN;
+
 public class Rank {
     private List<Piece> pieces;
 
@@ -18,27 +20,29 @@ public class Rank {
     public String getPrint() {
         return this.pieces.stream()
                 .map(Piece::getRepresentation)
-                .map(p -> Character.toString(p))
+                .map(piece -> Character.toString(piece))
                 .collect(Collectors.joining());
     }
 
-    public int getPieceCount(Piece p) {
+    public int getPieceCount(Piece piece) {
         return (int) this.pieces.stream()
-                .filter(piece -> p.equals(piece))
+                .filter(pieceCompare -> piece.equals(pieceCompare))
                 .count();
     }
 
     public Piece getPieceAt(Position position) {
-        return this.pieces.get(position.col);
+        return this.pieces.get(position.column);
     }
 
     public void move(Position position, Piece piece) {
-        this.pieces.set(position.col, piece);
+        this.pieces.set(position.column, piece);
     }
 
     public static Rank createBlackPawnRank() {
         Rank rank = new Rank();
-        for (int i = 0; i < 8; i++) rank.pieces.add(Pawn.createBlack());
+        for (int column = 0; column < BOARD_COLUMN; column++) {
+            rank.pieces.add(Pawn.createBlack());
+        }
         return rank;
     }
 
@@ -57,7 +61,9 @@ public class Rank {
 
     public static Rank createWhitePawnRank() {
         Rank rank = new Rank();
-        for (int i = 0; i < 8; i++) rank.pieces.add(Pawn.createWhite());
+        for (int column = 0; column < BOARD_COLUMN; column++) {
+            rank.pieces.add(Pawn.createWhite());
+        }
         return rank;
     }
 
@@ -76,36 +82,35 @@ public class Rank {
 
     public static Rank createBlankRank() {
         Rank rank = new Rank();
-        for (int i = 0; i < 8; i++) rank.pieces.add(Blank.createBlank());
+        for (int column = 0; column < BOARD_COLUMN; column++) {
+            rank.pieces.add(Blank.createBlank());
+        }
         return rank;
     }
 
     public IntStream getPawnPosition(Piece.Color color) {
         return IntStream
-                .range(0, this.pieces.size())
-                .filter(i -> this.pieces.get(i).equals(
-                        color == Piece.Color.WHITE ?
-                                Pawn.createWhite() : Pawn.createBlack())
-                );
+                .range(0, BOARD_COLUMN)
+                .filter(index -> {
+                    Piece piece = this.pieces.get(index);
+                    return piece.isColor(color) && piece.isPawn();
+                });
     }
 
     public double calculateScore(Piece.Color color) {
         return this.pieces.stream()
-                .filter(piece -> piece.getColor() == color)
+                .filter(piece -> piece.isColor(color))
                 .mapToDouble(piece -> piece.getScore())
                 .sum();
     }
 
     public boolean checkKingAlive(Piece.Color color) {
         return this.pieces.stream()
-                .anyMatch(piece ->
-                        color == Piece.Color.WHITE ?
-                                piece.equals(King.createWhite()) : piece.equals(King.createBlack())
-                );
+                .anyMatch(piece -> piece.isColor(color) && piece.isKing());
     }
 
     public Stream<Piece> getPieceOfColor(Piece.Color color) {
         return this.pieces.stream()
-                .filter(piece -> piece.getColor() == color);
+                .filter(piece -> piece.isColor(color));
     }
 }

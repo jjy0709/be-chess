@@ -1,6 +1,5 @@
 package chess.pieces;
 
-import chess.ChessGame;
 import chess.board.Position;
 
 public class Pawn extends Piece {
@@ -23,12 +22,10 @@ public class Pawn extends Piece {
     @Override
     public void verifyMovePosition(Position source, Position destination) throws Exception {
         verifyStepDirection(source, destination);
-
-        if (!source.inStraight(destination))
-            verifyPawnSideStep(source, destination);
-
+        if (!source.inSameColumn(destination)) {
+            throw new Exception(String.format("%s이 이동 가능한 곳이 아닙니다.", this.getType()));
+        }
         verifyFirstStep(source, destination);
-        this.moved = true;
     }
 
     private void verifyStepDirection(Position source, Position destination) throws Exception {
@@ -37,17 +34,23 @@ public class Pawn extends Piece {
             throw new Exception("PAWN은 앞으로만 움직일 수 있습니다.");
     }
 
-    private void verifyPawnSideStep(Position source, Position destination) throws Exception {
-        if (!(source.distance(destination) == 1 && source.inDiagonal(destination)))
-            throw new Exception("PAWN이 이동할 수 없는 위치입니다.");
-        if (!ChessGame.checkPieceExist(destination))
-            throw new Exception("PAWN은 적이 없는 경우 대각선으로 움직일 수 없습니다.");
-    }
-
     private void verifyFirstStep(Position source, Position destination) throws Exception {
         if ((this.moved && source.distance(destination) > 1)
                 || (source.distance(destination) > 2))
             throw new Exception("PAWN은 처음에만 최대 두 칸 움직일 수 있습니다.");
+    }
+
+    public void verifyMovePositionWhenEnemyExist(Position source, Position destination) throws Exception {
+        verifyStepDirection(source, destination);
+        if (!(source.inSameColumn(destination)
+                || (source.distance(destination) == 1 && source.inDiagonal(destination)))) {
+            throw new Exception(String.format("%s이 이동 가능한 곳이 아닙니다.", this.getType()));
+        }
+        verifyFirstStep(source, destination);
+    }
+
+    public void markPawnMoved() {
+        this.moved = true;
     }
 
 }

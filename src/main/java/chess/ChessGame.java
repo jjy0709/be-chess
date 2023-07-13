@@ -12,9 +12,10 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 public class ChessGame {
-    static Board board = new Board();
+    private Board board;
 
-    public ChessGame() {
+    public ChessGame(Board board) {
+        this.board =board;
     }
 
     public void initialize() {
@@ -31,6 +32,10 @@ public class ChessGame {
     }
 
     private boolean checkKingAlive(Color color) {
+        char kingRepresentation = 'k';
+        if(color == Color.WHITE) {
+            kingRepresentation = 'K';
+        }
         return this.board.getRank().anyMatch(r -> r.checkKingAlive(color));
     }
 
@@ -59,10 +64,6 @@ public class ChessGame {
         return this.board.getRank()
                 .flatMap(r -> r.getPieceOfColor(color))
                 .sorted(cmp).toList();
-    }
-
-    public static boolean checkPieceExist(Position position) {
-        return !(board.getPieceAt(position).isBlank());
     }
 
     public void move(Position source, Position destination) throws Exception {

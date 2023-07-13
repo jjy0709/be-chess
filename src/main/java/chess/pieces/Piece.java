@@ -2,6 +2,8 @@ package chess.pieces;
 
 import chess.board.Position;
 
+import java.util.Arrays;
+
 abstract public class Piece {
     public enum Color {
         WHITE, BLACK, NOCOLOR;
@@ -16,24 +18,31 @@ abstract public class Piece {
         KING('k', 0.),
         NO_PIECE('.', 0.);
 
-        private char print;
+        private char representation;
         private double score;
 
         Type(char print, double score) {
-            this.print = print;
+            this.representation = print;
             this.score = score;
         }
 
         public char getWhiteRepresentation() {
-            return this.print;
+            return this.representation;
         }
 
         public char getBlackRepresentation() {
-            return Character.toUpperCase(this.print);
+            return Character.toUpperCase(this.representation);
         }
 
         public double getScore() {
             return this.score;
+        }
+
+        public double getScoreByRepresentation(char representation) {
+             return Arrays.stream(Type.values())
+                    .filter(type -> type.representation == representation)
+                    .mapToDouble(type -> type.score)
+                    .sum();
         }
     }
 
@@ -69,13 +78,30 @@ abstract public class Piece {
         return this.color == Color.BLACK;
     }
 
+    public boolean isBlank() {
+        return this.type == Type.NO_PIECE;
+    }
+
+    public boolean isColor(Color color) {
+        return this.color == color;
+    }
+
+    public boolean isSameColor(Piece piece) {
+        return this.color == piece.color;
+    }
+
     public boolean isKnight() {
         return this.type == Type.KNIGHT;
     }
 
-    public boolean isBlank() {
-        return this.type == Type.NO_PIECE;
+    public boolean isPawn() {
+        return this.type == Type.PAWN;
     }
+
+    public boolean isKing() {
+        return this.type == Type.KING;
+    }
+
 
     public boolean equals(Object p) {
         if (!(p instanceof Piece)) return false;

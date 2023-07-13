@@ -1,5 +1,6 @@
 package chess;
 
+import chess.board.Board;
 import chess.board.Position;
 import chess.pieces.*;
 import org.junit.jupiter.api.Test;
@@ -9,7 +10,7 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class ChessGameTest {
-    ChessGame chessGame = new ChessGame();
+    ChessGame chessGame = new ChessGame(new Board());
 
     @Test
     void calculatePoint() {
@@ -47,8 +48,10 @@ class ChessGameTest {
         addPiece("e1", Rook.createWhite());
         addPiece("f1", King.createWhite());
 
-        List<Piece> res = chessGame.sortPiecesByScore(Piece.Color.BLACK, true);
-        res.stream().map(p -> p.getScore()).forEach(System.out::println);
+        List<Piece> resultBlack = chessGame.sortPiecesByScore(Piece.Color.BLACK, true);
+        List<Piece> resultWhite = chessGame.sortPiecesByScore(Piece.Color.WHITE, false);
+        assertEquals(0., resultBlack.get(0).getScore());
+        assertEquals(5., resultWhite.get(0).getScore());
         // List contain 해서 첫번째 꺼의 점수랑 비 assertThat에 containsExactly로 순서 검증
     }
 }
