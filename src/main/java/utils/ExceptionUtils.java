@@ -20,4 +20,5 @@ public class ExceptionUtils {
     public static IllegalArgumentException getExceptionNotRightTurn(Color color) {
         return new IllegalArgumentException(String.format("%s의 차례입니다.", color.toString()));
     }
+
 }

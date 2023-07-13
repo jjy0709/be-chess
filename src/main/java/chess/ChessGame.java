@@ -66,10 +66,17 @@ public class ChessGame {
     }
 
     public void move(String source, String destination) throws RuntimeException {
+        if(source.length() != 2 || destination.length() != 2) {
+            throw new IllegalArgumentException(INVALID_POSITION);
+        }
+
         Position sourcePosition = new Position(source);
         Position destinationPosition = new Position(destination);
+
         checkPositionRange(sourcePosition, destinationPosition);
+
         board.move(sourcePosition, destinationPosition, this.gameTurn);
+
         if(!checkKingAlive(getOpposite(this.gameTurn))) {
             throw new RuntimeException(String.format("%s 이(가) 이겼습니다.", this.gameTurn));
         }
