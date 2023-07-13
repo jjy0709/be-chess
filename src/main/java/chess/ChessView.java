@@ -11,11 +11,6 @@ public class ChessView {
         System.out.println("명령어를 입력하세요.");
     }
 
-    public void showStart() {
-        showGetInput();
-        System.out.println("게임이 시작되었습니다.");
-    }
-
     public void showWrongInput() {
         System.out.println("잘못된 입력입니다.");
     }
@@ -31,5 +26,9 @@ public class ChessView {
 
     public void showNotStarted() {
         System.out.println("게임이 시작되지 않았습니다.");
+    }
+
+    public void showGameEnd() {
+        System.out.println("게임을 종료합니다.");
     }
 }

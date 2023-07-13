@@ -14,7 +14,6 @@ class ChessViewTest {
     ChessGame chessGame = new ChessGame(new Board());
     ChessView chessView = new ChessView();
 
-    PrintStream printStream = System.out;
     ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
 
     @BeforeEach

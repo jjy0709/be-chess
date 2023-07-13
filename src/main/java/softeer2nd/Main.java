@@ -4,6 +4,7 @@ import chess.ChessGame;
 import chess.ChessView;
 import chess.board.Board;
 
+import java.util.Arrays;
 import java.util.Scanner;
 
 import static utils.StringUtils.*;
@@ -16,26 +17,27 @@ public class Main {
 
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
-        chessView.showStart();
+        chessView.showGetInput();
         String input = sc.nextLine();
 
         while (true) {
             if (input.equals(START)) {
                 start();
+            } else if (input.equals(END)) {
+                gameStarted = false;
+                chessView.showGameEnd();
+                return;
             } else if (!gameStarted) {
                 chessView.showNotStarted();
             } else if (input.startsWith(MOVE)) {
                 move(input);
             } else if (input.equals(SCORE)) {
                 chessView.showGameScore(chessGame);
-            } else if (input.equals(END)) {
-                gameStarted = false;
-                return;
             } else {
                 chessView.showWrongInput();
             }
 
-            if(gameEnded){
+            if (gameEnded) {
                 return;
             }
 
@@ -53,6 +55,12 @@ public class Main {
 
     private static void move(String input) {
         String[] inputSplit = input.split(" ");
+
+        if (inputSplit.length != 3) {
+            chessView.showWrongInput();
+            return;
+        }
+
         try {
             chessGame.move(inputSplit[1], inputSplit[2]);
         } catch (IllegalArgumentException exception) {
@@ -61,6 +69,8 @@ public class Main {
             System.out.println(exception.getMessage());
             gameEnded = true;
         }
+
         chessView.showGameBoard(chessGame);
     }
+
 }
