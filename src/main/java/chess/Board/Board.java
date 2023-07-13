@@ -6,6 +6,7 @@ import chess.pieces.Pawn;
 import chess.pieces.Piece;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -49,7 +50,7 @@ public class Board {
         int[] columns = new int[BOARD_COLUMN];
         this.ranks.stream()
                 .flatMapToInt(rank -> rank.getPawnPosition(color))
-                .map(index -> columns[index]++);
+                .forEach(index -> columns[index]++);
         return columns;
     }
 
@@ -71,10 +72,10 @@ public class Board {
     }
 
     public void movePiece(Position position, Piece piece) {
+        this.ranks.get(position.rank).move(position, piece);
         if (piece.isPawn()) {
             ((Pawn) piece).markPawnMoved();
         }
-        this.ranks.get(position.rank).move(position, piece);
     }
 
     public void move(Position source, Position destination, Color gameTurn) throws IllegalArgumentException {

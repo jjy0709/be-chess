@@ -1,10 +1,12 @@
 package chess.board;
 
+import chess.pieces.Enums.Color;
 import chess.pieces.*;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertArrayEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class RankTest {
     Rank blackPawnRank = Rank.createBlackPawnRank();
@@ -31,6 +33,14 @@ class RankTest {
         assertEquals(0, whitePawnRank.getPieceCount(Rook.createWhite()));
         assertEquals(1, whitePieceRank.getPieceCount(King.createWhite()));
         assertEquals(0, blankRank.getPieceCount(Queen.createWhite()));
+    }
+
+    @Test
+    @DisplayName("Pawn의 column 위치를 잘 나타내는지 확인한다.")
+    void getPawnPosition() {
+        int[] result = blackPawnRank.getPawnPosition(Color.BLACK).toArray();
+        int[] actual = {0, 1, 2, 3, 4, 5, 6, 7};
+        assertArrayEquals(actual, result);
     }
 
 }

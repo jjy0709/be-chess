@@ -7,8 +7,20 @@ import org.junit.jupiter.api.Test;
 
 import java.util.List;
 
-import static chess.pieces.Enums.Color.*;
+import static chess.pieces.Enums.Color.BLACK;
+import static chess.pieces.Enums.Color.WHITE;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+
+/**
+ * ChessGame Test
+ * - 게임 스코어 제대로 나오는지 확인
+ *  - 킹이 없을 때
+ *  - 킹이 있을 때
+ * - 기물들 점수로 정렬했을 때 제대로 나오는지
+ * - 보드 밖의 위치로 움직였을 때 에러 제대로 나오는지
+ * - 킹 죽었을 때 exception 던지는지
+ * - 움직이고 나서 게임 턴 돌아가는지
+ */
 
 class ChessGameTest {
     ChessGame chessGame = new ChessGame(new Board());
