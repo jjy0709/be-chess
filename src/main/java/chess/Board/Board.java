@@ -81,7 +81,7 @@ public class Board {
         Piece pieceSource = getPieceAt(source);
         Piece pieceDestination = getPieceAt(destination);
 
-        checkPositionRange(source, destination);
+        checkSourceIsBlank(pieceSource);
 
         checkDestinationPieceColor(pieceSource, pieceDestination);
 
@@ -95,9 +95,9 @@ public class Board {
         movePiece(source, Blank.createBlank());
     }
 
-    private void checkPositionRange(Position source, Position destination) throws IllegalArgumentException {
-        if (!source.inBoard() || !destination.inBoard()) {
-            throw new IllegalArgumentException(CANNOT_MOVE_OUT_BOARD);
+    private void checkSourceIsBlank(Piece sourcePiece) throws IllegalArgumentException {
+        if (sourcePiece.isBlank()) {
+            throw new IllegalArgumentException(CANNOT_MOVE_BLANK);
         }
     }
 

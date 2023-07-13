@@ -4,7 +4,7 @@ import chess.pieces.Piece;
 
 public class ExceptionUtils {
     public static final String CANNOT_MOVE_BLANK = "빈 칸은 이동할 수 없습니다.";
-    public static final String CANNOT_MOVE_OUT_BOARD = "기물을 보드 밖으로 이동시킬 수 없습니다.";
+    public static final String INVALID_POSITION = "유효하지 않은 위치입니다.";
     public static final String ALREADY_PIECE_EXIST = "이미 같은 색의 기물이 존재하는 위치입니다.";
     private ExceptionUtils() {
     }

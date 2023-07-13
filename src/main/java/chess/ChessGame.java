@@ -9,7 +9,7 @@ import java.util.Arrays;
 import java.util.Comparator;
 import java.util.List;
 
-import static utils.ExceptionUtils.CANNOT_MOVE_BLANK;
+import static utils.ExceptionUtils.*;
 
 public class ChessGame {
     private Board board;
@@ -65,10 +65,14 @@ public class ChessGame {
     public void move(String source, String destination) throws IllegalArgumentException {
         Position sourcePosition = new Position(source);
         Position destinationPosition = new Position(destination);
-        if (board.getPieceAt(sourcePosition).isBlank()) {
-            throw new IllegalArgumentException(CANNOT_MOVE_BLANK);
-        }
+        checkPositionRange(sourcePosition, destinationPosition);
         board.move(sourcePosition, destinationPosition);
+    }
+
+    private void checkPositionRange(Position source, Position destination) throws IllegalArgumentException {
+        if (!source.inBoard() || !destination.inBoard()) {
+            throw new IllegalArgumentException(INVALID_POSITION);
+        }
     }
 
     public void movePiece(Position position, Piece piece) {
