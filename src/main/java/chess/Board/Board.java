@@ -8,7 +8,6 @@ import chess.pieces.Piece;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 import static utils.ExceptionUtils.*;
 import static utils.StringUtils.appendNewLine;
@@ -40,16 +39,18 @@ public class Board {
         }
     }
 
-
-    // TODO: 디미터의 법칙 적용?. 메세지로 상호작용
-    public Stream<Rank> getRank() {
-        return this.ranks.stream();
-    }
-
-    public List getPieceListOfColor(Color color) {
+    public List<Piece> getPieceListOfColor(Color color) {
         return this.ranks.stream()
                 .flatMap(rank -> rank.getPieceOfColor(color))
                 .collect(Collectors.toList());
+    }
+
+    public int[] getPawnCountOfEachColumn(Color color) {
+        int[] columns = new int[BOARD_COLUMN];
+        this.ranks.stream()
+                .flatMapToInt(rank -> rank.getPawnPosition(color))
+                .map(index -> columns[index]++);
+        return columns;
     }
 
     public String getBoardString() {

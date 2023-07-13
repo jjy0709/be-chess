@@ -5,11 +5,9 @@ import chess.board.Position;
 import chess.pieces.Enums.Color;
 import chess.pieces.Piece;
 
+import java.util.Arrays;
 import java.util.Comparator;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-import java.util.stream.Collectors;
 
 import static utils.ExceptionUtils.CANNOT_MOVE_BLANK;
 
@@ -17,7 +15,7 @@ public class ChessGame {
     private Board board;
 
     public ChessGame(Board board) {
-        this.board =board;
+        this.board = board;
     }
 
     public void initialize() {
@@ -36,38 +34,32 @@ public class ChessGame {
     }
 
     private boolean checkKingAlive(Color color) {
-        char kingRepresentation = 'k';
-        if(color == Color.WHITE) {
-            kingRepresentation = 'K';
-        }
-        return this.board.getRank().anyMatch(r -> r.checkKingAlive(color));
+        return this.board.getPieceListOfColor(color).stream()
+                .anyMatch(Piece::isKing);
     }
 
     private double getTotalPoint(Color color) {
-        return this.board.getRank()
-                .mapToDouble(r -> r.calculateScore(color))
+        return this.board.getPieceListOfColor(color).stream()
+                .mapToDouble(Piece::getScore)
                 .sum();
     }
 
     private double getPenaltyPoint(Color color) {
-        Map<Integer, Long> pawnCnt = this.board.getRank()
-                .flatMapToInt(r -> r.getPawnPosition(color))
-                .boxed()
-                .collect(Collectors.groupingBy(arg -> arg, HashMap::new, Collectors.counting()));
-
-        return pawnCnt.values().stream()
-                .filter(p -> p >= 2)
-                .mapToDouble(p -> p * -0.5)
+        return Arrays.stream(this.board.getPawnCountOfEachColumn(color)).asDoubleStream()
+                .filter(count -> count > 1.)
+                .map(count -> count * -0.5)
                 .sum();
     }
 
-    public List sortPiecesByScore(Color color, boolean asend) {
-        Comparator cmp = asend ? Comparator.comparing(Piece::getScore)
-                : Comparator.comparing(Piece::getScore).reversed();
+    public List<Piece> sortPiecesByScore(Color color, boolean asend) {
+        Comparator<Piece> cmp = Comparator.comparing(Piece::getScore);
+        if(!asend){
+            cmp = Comparator.comparing(Piece::getScore).reversed();
+        }
 
-        return this.board.getRank()
-                .flatMap(r -> r.getPieceOfColor(color))
-                .sorted(cmp).toList();
+        return this.board.getPieceListOfColor(color).stream()
+                .sorted(cmp)
+                .toList();
     }
 
     public void move(String source, String destination) throws IllegalArgumentException {

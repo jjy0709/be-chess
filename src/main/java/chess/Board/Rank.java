@@ -98,18 +98,6 @@ public class Rank {
                 });
     }
 
-    public double calculateScore(Color color) {
-        return this.pieces.stream()
-                .filter(piece -> piece.isColor(color))
-                .mapToDouble(piece -> piece.getScore())
-                .sum();
-    }
-
-    public boolean checkKingAlive(Color color) {
-        return this.pieces.stream()
-                .anyMatch(piece -> piece.isColor(color) && piece.isKing());
-    }
-
     public Stream<Piece> getPieceOfColor(Color color) {
         return this.pieces.stream()
                 .filter(piece -> piece.isColor(color));
