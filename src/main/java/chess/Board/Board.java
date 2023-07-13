@@ -1,6 +1,7 @@
 package chess.board;
 
 import chess.pieces.Blank;
+import chess.pieces.Enums.Color;
 import chess.pieces.Pawn;
 import chess.pieces.Piece;
 
@@ -45,6 +46,12 @@ public class Board {
         return this.ranks.stream();
     }
 
+    public List getPieceListOfColor(Color color) {
+        return this.ranks.stream()
+                .flatMap(rank -> rank.getPieceOfColor(color))
+                .collect(Collectors.toList());
+    }
+
     public String getBoardString() {
         return this.ranks.stream()
                 .map(Rank::getPrint)
@@ -73,7 +80,7 @@ public class Board {
         Piece pieceSource = getPieceAt(source);
         Piece pieceDestination = getPieceAt(destination);
 
-        checkDestinationRange(destination);
+        checkPositionRange(source, destination);
 
         checkDestinationPieceColor(pieceSource, pieceDestination);
 
@@ -87,8 +94,8 @@ public class Board {
         movePiece(source, Blank.createBlank());
     }
 
-    private void checkDestinationRange(Position destination) throws IllegalArgumentException {
-        if (!destination.inBoard()) {
+    private void checkPositionRange(Position source, Position destination) throws IllegalArgumentException {
+        if (!source.inBoard() || !destination.inBoard()) {
             throw new IllegalArgumentException(CANNOT_MOVE_OUT_BOARD);
         }
     }

@@ -1,6 +1,7 @@
 package chess.board;
 
 import chess.pieces.*;
+import chess.pieces.Enums.Color;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -88,7 +89,7 @@ public class Rank {
         return rank;
     }
 
-    public IntStream getPawnPosition(Piece.Color color) {
+    public IntStream getPawnPosition(Color color) {
         return IntStream
                 .range(0, BOARD_COLUMN)
                 .filter(index -> {
@@ -97,19 +98,19 @@ public class Rank {
                 });
     }
 
-    public double calculateScore(Piece.Color color) {
+    public double calculateScore(Color color) {
         return this.pieces.stream()
                 .filter(piece -> piece.isColor(color))
                 .mapToDouble(piece -> piece.getScore())
                 .sum();
     }
 
-    public boolean checkKingAlive(Piece.Color color) {
+    public boolean checkKingAlive(Color color) {
         return this.pieces.stream()
                 .anyMatch(piece -> piece.isColor(color) && piece.isKing());
     }
 
-    public Stream<Piece> getPieceOfColor(Piece.Color color) {
+    public Stream<Piece> getPieceOfColor(Color color) {
         return this.pieces.stream()
                 .filter(piece -> piece.isColor(color));
     }

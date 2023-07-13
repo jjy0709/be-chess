@@ -1,9 +1,8 @@
 package softeer2nd;
 
-import chess.board.Board;
-import chess.board.Position;
 import chess.ChessGame;
 import chess.ChessView;
+import chess.board.Board;
 
 import java.util.Scanner;
 
@@ -22,7 +21,7 @@ public class Main {
         while (true) {
             if (input.equals(START)) {
                 start();
-            } else if (!gameStarted ){
+            } else if (!gameStarted) {
                 chessView.showNotStarted();
             } else if (input.startsWith(MOVE)) {
                 move(input);
@@ -50,9 +49,9 @@ public class Main {
     private static void move(String input) {
         String[] inputSplit = input.split(" ");
         try {
-            chessGame.move(new Position(inputSplit[1]), new Position(inputSplit[2]));
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
+            chessGame.move(inputSplit[1], inputSplit[2]);
+        } catch (IllegalArgumentException exception) {
+            System.out.println(exception.getMessage());
         }
         chessView.showGameBoard(chessGame);
     }

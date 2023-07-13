@@ -3,7 +3,7 @@ package chess.pieces;
 import chess.ChessGame;
 import chess.board.Board;
 import chess.board.Position;
-import chess.pieces.Piece.Type;
+import chess.pieces.Enums.Type;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 

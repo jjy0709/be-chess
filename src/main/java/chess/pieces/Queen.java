@@ -1,6 +1,8 @@
 package chess.pieces;
 
 import chess.board.Position;
+import chess.pieces.Enums.Color;
+import chess.pieces.Enums.Type;
 
 import static utils.ExceptionUtils.getExceptionForPieceNotMove;
 

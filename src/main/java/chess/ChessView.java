@@ -1,6 +1,6 @@
 package chess;
 
-import chess.pieces.Piece.Color;
+import static chess.pieces.Enums.Color.*;
 
 public class ChessView {
 
@@ -25,8 +25,8 @@ public class ChessView {
     }
 
     public void showGameScore(ChessGame chessGame) {
-        System.out.println(String.format("WHITE 점수: %.1f", chessGame.getGameScoreOf(Color.WHITE)));
-        System.out.println(String.format("BLACK 점수: %.1f", chessGame.getGameScoreOf(Color.BLACK)));
+        System.out.println(String.format("WHITE 점수: %.1f", chessGame.getGameScoreOf(WHITE)));
+        System.out.println(String.format("BLACK 점수: %.1f", chessGame.getGameScoreOf(BLACK)));
     }
 
     public void showNotStarted() {

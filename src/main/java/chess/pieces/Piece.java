@@ -1,50 +1,12 @@
 package chess.pieces;
 
 import chess.board.Position;
+import chess.pieces.Enums.Color;
+import chess.pieces.Enums.Type;
 
 import java.util.Arrays;
 
 abstract public class Piece {
-    public enum Color {
-        WHITE, BLACK, NOCOLOR;
-    }
-
-    public enum Type {
-        PAWN('p', 1.),
-        ROOK('r', 5.),
-        KNIGHT('n', 2.5),
-        BISHOP('b', 3.),
-        QUEEN('q', 9.),
-        KING('k', 0.),
-        NO_PIECE('.', 0.);
-
-        private char representation;
-        private double score;
-
-        Type(char print, double score) {
-            this.representation = print;
-            this.score = score;
-        }
-
-        public char getWhiteRepresentation() {
-            return this.representation;
-        }
-
-        public char getBlackRepresentation() {
-            return Character.toUpperCase(this.representation);
-        }
-
-        public double getScore() {
-            return this.score;
-        }
-
-        public double getScoreByRepresentation(char representation) {
-             return Arrays.stream(Type.values())
-                    .filter(type -> type.representation == representation)
-                    .mapToDouble(type -> type.score)
-                    .sum();
-        }
-    }
 
     protected Color color;
     protected Type type;

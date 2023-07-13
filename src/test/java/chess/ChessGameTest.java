@@ -7,6 +7,7 @@ import org.junit.jupiter.api.Test;
 
 import java.util.List;
 
+import static chess.pieces.Enums.Color.*;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class ChessGameTest {
@@ -26,8 +27,8 @@ class ChessGameTest {
         addPiece("e1", Rook.createWhite());
         addPiece("f1", King.createWhite());
 
-        assertEquals(15.0, chessGame.getGameScoreOf(Piece.Color.BLACK), 0.01);
-        assertEquals(7.0, chessGame.getGameScoreOf(Piece.Color.WHITE), 0.01);
+        assertEquals(15.0, chessGame.getGameScoreOf(BLACK), 0.01);
+        assertEquals(7.0, chessGame.getGameScoreOf(WHITE), 0.01);
     }
 
     private void addPiece(String position, Piece piece) {
@@ -48,8 +49,8 @@ class ChessGameTest {
         addPiece("e1", Rook.createWhite());
         addPiece("f1", King.createWhite());
 
-        List<Piece> resultBlack = chessGame.sortPiecesByScore(Piece.Color.BLACK, true);
-        List<Piece> resultWhite = chessGame.sortPiecesByScore(Piece.Color.WHITE, false);
+        List<Piece> resultBlack = chessGame.sortPiecesByScore(BLACK, true);
+        List<Piece> resultWhite = chessGame.sortPiecesByScore(WHITE, false);
         assertEquals(0., resultBlack.get(0).getScore());
         assertEquals(5., resultWhite.get(0).getScore());
         // List contain 해서 첫번째 꺼의 점수랑 비 assertThat에 containsExactly로 순서 검증

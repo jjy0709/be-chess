@@ -1,10 +1,10 @@
 package chess.pieces;
 
 import chess.board.Position;
-import chess.pieces.Piece.Type;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import static chess.pieces.Enums.Type.BISHOP;
 import static org.junit.jupiter.api.Assertions.*;
 
 class BishopTest {
@@ -17,8 +17,8 @@ class BishopTest {
         assertTrue(white.isWhite());
         assertTrue(black.isBlack());
 
-        assertEquals(Type.BISHOP, white.getType());
-        assertEquals(Type.BISHOP, black.getType());
+        assertEquals(BISHOP, white.getType());
+        assertEquals(BISHOP, black.getType());
 
         assertEquals('b', white.getRepresentation());
         assertEquals('B', black.getRepresentation());

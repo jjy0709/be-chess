@@ -2,8 +2,8 @@ package chess;
 
 import chess.board.Board;
 import chess.board.Position;
+import chess.pieces.Enums.Color;
 import chess.pieces.Piece;
-import chess.pieces.Piece.Color;
 
 import java.util.Comparator;
 import java.util.HashMap;
@@ -61,7 +61,7 @@ public class ChessGame {
                 .sum();
     }
 
-    public List<Piece> sortPiecesByScore(Color color, boolean asend) {
+    public List sortPiecesByScore(Color color, boolean asend) {
         Comparator cmp = asend ? Comparator.comparing(Piece::getScore)
                 : Comparator.comparing(Piece::getScore).reversed();
 
@@ -70,11 +70,13 @@ public class ChessGame {
                 .sorted(cmp).toList();
     }
 
-    public void move(Position source, Position destination) throws IllegalArgumentException {
-        if (board.getPieceAt(source).isBlank()) {
+    public void move(String source, String destination) throws IllegalArgumentException {
+        Position sourcePosition = new Position(source);
+        Position destinationPosition = new Position(destination);
+        if (board.getPieceAt(sourcePosition).isBlank()) {
             throw new IllegalArgumentException(CANNOT_MOVE_BLANK);
         }
-        board.move(source, destination);
+        board.move(sourcePosition, destinationPosition);
     }
 
     public void movePiece(Position position, Piece piece) {
