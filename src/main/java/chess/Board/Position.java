@@ -20,7 +20,7 @@ public class Position {
     }
 
     public boolean inBoard() {
-        return !(this.rank > 8 || this.rank < 1 || this.column > 7 || this.column < 0);
+        return !(this.rank > 7 || this.rank < 0 || this.column > 7 || this.column < 0);
     }
 
     public boolean inDiagonal(Position destination) {

@@ -38,6 +38,7 @@ public class Main {
             }
 
             if (gameEnded) {
+                chessView.showGameScore(chessGame);
                 return;
             }
 
@@ -73,4 +74,13 @@ public class Main {
         chessView.showGameBoard(chessGame);
     }
 
+    /**
+     * move d2 d3
+     * move f7 f6
+     * move e2 e4
+     * move g7 g5
+     * move d1 h5
+     * move f8 g7
+     * move h5 e8
+     */
 }

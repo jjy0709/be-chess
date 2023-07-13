@@ -81,7 +81,7 @@ class ChessGameTest {
     @DisplayName("보드 밖의 위치에서 이동하거나 보드 밖으로 이동할 수 없다.")
     void moveWrongPosition() {
         chessGame.initialize();
-        String outBoard = "a";
+        String outBoard = "a0";
         String outBoard1 = "a24";
         String outBoard2 = "wrong1";
         String outBoard3 = "z4";
