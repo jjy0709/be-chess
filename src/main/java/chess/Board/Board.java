@@ -17,22 +17,25 @@ public class Board {
     public static final int BOARD_COLUMN = 8;
 
     public Board() {
-        for (int rankNumber = 0; rankNumber < BOARD_ROW; rankNumber++)
+        for (int rankNumber = 0; rankNumber < BOARD_ROW; rankNumber++) {
             this.ranks.add(Rank.createBlankRank());
+        }
     }
 
     public void initialize() {
         this.ranks.set(0, Rank.createBlackPieceRank());
         this.ranks.set(1, Rank.createBlackPawnRank());
-        for (int rankNumber = 2; rankNumber < 6; rankNumber++)
+        for (int rankNumber = 2; rankNumber < 6; rankNumber++) {
             this.ranks.set(rankNumber, Rank.createBlankRank());
+        }
         this.ranks.set(6, Rank.createWhitePawnRank());
         this.ranks.set(7, Rank.createWhitePieceRank());
     }
 
     public void initializeEmpty() {
-        for (int rankNumber = 0; rankNumber < BOARD_ROW; rankNumber++)
+        for (int rankNumber = 0; rankNumber < BOARD_ROW; rankNumber++) {
             this.ranks.set(rankNumber, Rank.createBlankRank());
+        }
     }
 
 

@@ -66,7 +66,9 @@ abstract public class Piece {
     }
 
     public char getRepresentation() {
-        if (this.color != Color.BLACK) return this.type.getWhiteRepresentation();
+        if (this.color != Color.BLACK) {
+            return this.type.getWhiteRepresentation();
+        }
         return this.type.getBlackRepresentation();
     }
 
@@ -104,7 +106,9 @@ abstract public class Piece {
 
 
     public boolean equals(Object p) {
-        if (!(p instanceof Piece)) return false;
+        if (!(p instanceof Piece)) {
+            return false;
+        }
         Piece piece = (Piece) p;
         return this.color == piece.color && this.type == piece.type;
     }

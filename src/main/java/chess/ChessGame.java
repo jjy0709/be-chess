@@ -27,7 +27,9 @@ public class ChessGame {
     }
 
     public double getGameScoreOf(Color color) {
-        if (!checkKingAlive(color)) return 0.;
+        if (!checkKingAlive(color)) {
+            return 0.;
+        }
         return getTotalPoint(color) + getPenaltyPoint(color);
     }
 
@@ -67,8 +69,9 @@ public class ChessGame {
     }
 
     public void move(Position source, Position destination) throws Exception {
-        if (board.getPieceAt(source).isBlank())
+        if (board.getPieceAt(source).isBlank()) {
             throw new Exception("빈 칸은 이동할 수 없습니다.");
+        }
         board.move(source, destination);
     }
 

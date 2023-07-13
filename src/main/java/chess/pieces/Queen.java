@@ -19,7 +19,8 @@ public class Queen extends Piece {
 
     @Override
     public void verifyMovePosition(Position source, Position destination) throws Exception {
-        if (!source.inOneLine(destination))
+        if (!source.inOneLine(destination)) {
             throw new Exception(String.format("%s이 이동 가능한 곳이 아닙니다.", this.getType()));
+        }
     }
 }

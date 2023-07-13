@@ -30,14 +30,16 @@ public class Pawn extends Piece {
 
     private void verifyStepDirection(Position source, Position destination) throws Exception {
         if ((this.isWhite() && destination.rank > source.rank) ||
-                (this.isBlack() && destination.rank < source.rank))
+                (this.isBlack() && destination.rank < source.rank)) {
             throw new Exception("PAWN은 앞으로만 움직일 수 있습니다.");
+        }
     }
 
     private void verifyFirstStep(Position source, Position destination) throws Exception {
         if ((this.moved && source.distance(destination) > 1)
-                || (source.distance(destination) > 2))
+                || (source.distance(destination) > 2)) {
             throw new Exception("PAWN은 처음에만 최대 두 칸 움직일 수 있습니다.");
+        }
     }
 
     public void verifyMovePositionWhenEnemyExist(Position source, Position destination) throws Exception {

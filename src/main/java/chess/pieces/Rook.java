@@ -18,7 +18,8 @@ public class Rook extends Piece {
 
     @Override
     public void verifyMovePosition(Position source, Position destination) throws Exception {
-        if (!source.inStraight(destination))
+        if (!source.inStraight(destination)) {
             throw new Exception(String.format("%s이 이동 가능한 곳이 아닙니다.", this.getType()));
+        }
     }
 }
