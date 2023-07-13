@@ -1,5 +1,6 @@
 package utils;
 
+import chess.pieces.Enums.Color;
 import chess.pieces.Piece;
 
 public class ExceptionUtils {
@@ -14,5 +15,9 @@ public class ExceptionUtils {
 
     public static IllegalArgumentException getExceptionForJumpOtherPiece(Piece piece) {
         return new IllegalArgumentException(String.format("%s은 다른 기물을 넘어 이동할 수 없습니다.", piece.getType()));
+    }
+
+    public static IllegalArgumentException getExceptionNotRightTurn(Color color) {
+        return new IllegalArgumentException(String.format("%s의 차례입니다.", color.toString()));
     }
 }

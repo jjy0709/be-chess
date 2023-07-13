@@ -9,13 +9,16 @@ import java.util.Arrays;
 import java.util.Comparator;
 import java.util.List;
 
+import static chess.pieces.Enums.Color.getOpposite;
 import static utils.ExceptionUtils.*;
 
 public class ChessGame {
     private Board board;
+    private Color gameTurn;
 
     public ChessGame(Board board) {
         this.board = board;
+        this.gameTurn = Color.WHITE;
     }
 
     public void initialize() {
@@ -66,7 +69,8 @@ public class ChessGame {
         Position sourcePosition = new Position(source);
         Position destinationPosition = new Position(destination);
         checkPositionRange(sourcePosition, destinationPosition);
-        board.move(sourcePosition, destinationPosition);
+        board.move(sourcePosition, destinationPosition, this.gameTurn);
+        this.gameTurn = getOpposite(this.gameTurn);
     }
 
     private void checkPositionRange(Position source, Position destination) throws IllegalArgumentException {

@@ -77,9 +77,11 @@ public class Board {
         this.ranks.get(position.rank).move(position, piece);
     }
 
-    public void move(Position source, Position destination) throws IllegalArgumentException {
+    public void move(Position source, Position destination, Color gameTurn) throws IllegalArgumentException {
         Piece pieceSource = getPieceAt(source);
         Piece pieceDestination = getPieceAt(destination);
+
+        checkGameTurnCorrect(pieceSource, gameTurn);
 
         checkSourceIsBlank(pieceSource);
 
@@ -93,6 +95,12 @@ public class Board {
 
         movePiece(destination, getPieceAt(source));
         movePiece(source, Blank.createBlank());
+    }
+
+    private void checkGameTurnCorrect(Piece sourcePiece, Color gameTurn) {
+        if(!sourcePiece.isColor(gameTurn)) {
+            throw getExceptionNotRightTurn(gameTurn);
+        }
     }
 
     private void checkSourceIsBlank(Piece sourcePiece) throws IllegalArgumentException {
